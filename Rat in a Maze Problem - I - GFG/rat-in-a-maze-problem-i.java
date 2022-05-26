@@ -33,31 +33,26 @@ class Rat {
 
 // m is the given matrix and n is the order of matrix
 class Solution {
-    public static ArrayList<String> findPath(int[][] grid, int n) {
-        ArrayList<String> answer = new ArrayList<>();
-        
-        generateAllPaths(grid,0,0,n,"",answer);
-        
-        return answer;
+    public static ArrayList<String> findPath(int[][] m, int n) {
+        ArrayList<String> ans = new ArrayList<>();
+        generatePath(m,n,0,0,"",ans);
+        return ans;
     }
     
-    
-    private static void generateAllPaths(int[][] grid,int currR,int currC,int n,String currP, ArrayList<String> answer){
-        
-        if(currR<0 || currC<0 || currR>=n || currC>=n || grid[currR][currC] == 0){
+    public static void generatePath(int[][] m,int n,int r, int c,String path,ArrayList<String> ans){
+        if(r<0 || c<0 || r>=n || c>=n || m[r][c] == 0){
             return;
         }
-        
-        if(currR == n-1 && currC == n-1){
-            answer.add(currP);
+        if(r == n-1 && c == n-1){
+            ans.add(path);
             return;
         }
-        grid[currR][currC] = 0;
-        generateAllPaths(grid,currR-1,currC,n,currP + "U",answer);
-        generateAllPaths(grid,currR,currC-1,n,currP+"L",answer);
-        generateAllPaths(grid,currR+1,currC,n,currP+"D",answer);
-        generateAllPaths(grid,currR,currC+1,n,currP+"R",answer);
-        grid[currR][currC] = 1;
+        m[r][c] = 0;
+        generatePath(m,n,r-1,c,path+"U",ans);
+        generatePath(m,n,r,c-1,path+"L",ans);
+        generatePath(m,n,r+1,c,path+"D",ans);
+        generatePath(m,n,r,c+1,path+"R",ans);
+        m[r][c] = 1;
         return;
     }
 }
