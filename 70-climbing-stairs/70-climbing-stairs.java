@@ -7,7 +7,7 @@ class Solution {
     
     public int totalWays(int n,int[] dp){
         if(n == 0)
-            return 1;
+            return dp[n] = 1;
         if(n<0)
             return 0;
         if(dp[n]!= -1)
