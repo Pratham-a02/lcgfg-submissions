@@ -1,22 +1,15 @@
 class Solution {
     public int fib(int n) {
-        return nthFibo(n,new HashMap<Integer,Integer>());
+        // int[] dp = new int[n+1];
+        // Arrays.fill(dp,-1);
+        return fibM(n);
     }
-    
-    private int nthFibo(int n, HashMap<Integer,Integer> hm){
-        if(n == 0 || n == 1){
+    public static int fibM(int n){
+        if(n<=1)
             return n;
-        }
         
-        int currKey = n;
-        if(hm.containsKey(currKey)){
-            return hm.get(currKey);
-        }
-        
-        int a = nthFibo(n-1,hm);
-        int b = nthFibo(n-2,hm);
-        
-        hm.put(currKey,a+b);
-        return a+b;
+        int nm1 = fibM(n-1);
+        int nm2 = fibM(n-2);
+        return nm1+nm2;
     }
 }
