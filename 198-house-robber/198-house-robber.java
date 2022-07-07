@@ -1,24 +1,18 @@
 class Solution {
     public int rob(int[] nums) {
-        return maxMoney(nums,0,new HashMap<Integer,Integer>());
+        int[] dp = new int[nums.length + 1];
+        Arrays.fill(dp,-1);
+        return HouseRob(nums,0,dp);
     }
-    
-    private int maxMoney(int[] nums,int idx,HashMap<Integer,Integer>hm){
-        if(idx>= nums.length){
+    public int HouseRob(int[] nums,int currIdx,int[] dp){
+        if(currIdx >= nums.length)
             return 0;
-        }
+        if(dp[currIdx]!= -1)
+            return dp[currIdx];
+        int rob = nums[currIdx] + HouseRob(nums,currIdx + 2,dp);
+        int noRob = HouseRob(nums, currIdx + 1,dp);
         
-        int currKey = idx;
-        if(hm.containsKey(currKey)){
-            return hm.get(currKey);
-        }
-        
-        int pathTaken = nums[idx] + maxMoney(nums,idx+2,hm);
-        int pathNotTaken = maxMoney(nums,idx+1,hm);
-        
-        hm.put(currKey,Math.max(pathTaken,pathNotTaken));
-        
-        return Math.max(pathTaken,pathNotTaken);
+        dp[currIdx] = Math.max(rob,noRob);
+        return dp[currIdx];
     }
-    
 }
