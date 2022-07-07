@@ -1,6 +1,6 @@
 class Solution {
     public int minCostClimbingStairs(int[] cost) {
-        int[] dp = new int[cost.length+1];
+        int[] dp = new int[cost.length];
         Arrays.fill(dp,-1);
         int a = minCost(cost,0,dp);
         int b = minCost(cost,1,dp);
