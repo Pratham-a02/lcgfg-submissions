@@ -48,26 +48,31 @@ class gfg
 class Solution 
 { 
     //Function to return max value that can be put in knapsack of capacity W.
-    static int knapSack(int W, int[] wt, int[] val, int n){ 
-         return solveknapSack(0,n,W,wt,val,new HashMap<String,Integer>()) ;
+    static int knapSack(int W, int wt[], int val[], int n){ 
+        int[][] dp = new int[n+1][W+1];
+        for(int []i:dp)
+        Arrays.fill(i,-1);
+         return maxProfit(0,wt,val,W,n,dp); 
     } 
-    private static int solveknapSack(int currIdx,int n,int W,int[] wt,int[] val,HashMap<String,Integer>hm){
-        if(currIdx>=n){
+    static int maxProfit(int currIdx,int[] wt,int[] val,int W,int n,int[][] dp){
+        
+        if(n==0 || W==0){
             return 0;
         }
         
-        String currKey = Integer.toString(currIdx) + "_" + Integer.toString(W);
-        if(hm.containsKey(currKey))
-            return hm.get(currKey);
-        
+        if(currIdx >= n){
+            return 0;
+        }
+        if(dp[currIdx][W]!= -1){
+            return dp[currIdx][W];
+        }
         int taken = 0;
-        if(wt[currIdx]<=W)
-            taken = val[currIdx] + solveknapSack(currIdx+1,n,W-wt[currIdx],wt,val,hm);
-        int notTaken = solveknapSack(currIdx+1,n,W,wt,val,hm);
+        if(wt[currIdx] <= W)
+            taken = val[currIdx] + maxProfit(currIdx+1,wt,val,W-wt[currIdx],n,dp);
+        int notTaken = maxProfit(currIdx + 1,wt,val,W,n,dp);
         
-        hm.put(currKey,Math.max(taken,notTaken));
-        
-        return Math.max(taken,notTaken);
+        dp[currIdx][W] = Math.max(taken,notTaken);
+        return dp[currIdx][W];
     }
 }
 
