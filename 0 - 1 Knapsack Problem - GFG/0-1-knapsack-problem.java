@@ -50,8 +50,11 @@ class Solution
     //Function to return max value that can be put in knapsack of capacity W.
     static int knapSack(int W, int wt[], int val[], int n){ 
         int[][] dp = new int[n+1][W+1];
-        for(int []i:dp)
-        Arrays.fill(i,-1);
+        for(int i = 0;i<dp.length;i++){
+            for(int j = 0;j<dp[0].length;j++){
+                dp[i][j] = -1;
+            }
+        }
          return maxProfit(0,wt,val,W,n,dp); 
     } 
     static int maxProfit(int currIdx,int[] wt,int[] val,int W,int n,int[][] dp){
