@@ -41,19 +41,14 @@ class Solution{
         {
             Arrays.fill(d,-1);
         }
-        // for(int i = 0;i<N;i++){
-        //     for(int j = 0;j<sum;j++){
-        //         dp[0][j] = false;
-        //         dp[i][0] = true;
-        //     }
-        // }
-int w= isPossible(arr,sum,N,dp);
-
-if(w==1)
-{
-    return true;
-}
-return false;
+        
+        int w= isPossible(arr,sum,N,dp);
+        
+        if(w==1)
+        {
+            return true;
+        }
+        return false;
     }
     static int isPossible(int[] arr,int sum,int N,int[][] dp){
         if(sum<0)
