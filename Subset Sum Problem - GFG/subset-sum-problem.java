@@ -33,29 +33,53 @@ class GFG
 //User function Template for Java
 
 class Solution{
-   static boolean isSubsetSumHelper(int N, int arr[], int sum, Boolean[][]dp){
-       //if(sum<0)return 0;
-       if(N==0 || sum==0)
-         {
-             return dp[N][sum]=sum==0?true:false;
-         }
 
-    // IDHR SE
-      if(dp[N][sum]!=null){
-          return dp[N][sum];
-      }
-   // IDHR tk
-       boolean isSubsetSum = false;
-       if(sum-arr[N-1]>=0){
-       isSubsetSum =isSubsetSum || isSubsetSumHelper(N-1,arr,sum-arr[N-1],dp) ;
-       }
-       isSubsetSum = isSubsetSum ||  isSubsetSumHelper(N-1,arr,sum,dp);
-       return dp[N][sum]=isSubsetSum ;
-   }
 
-    static Boolean isSubsetSum(int N, int arr[], int sum){
-        Boolean dp[][] = new Boolean[N+1][sum+1];
-        return isSubsetSumHelper(N,arr,sum, dp);
-    
+    static boolean isSubsetSum(int N, int arr[], int sum){
+        int[][] dp = new int[N+1][sum+1];
+        for(int  []d:dp)
+        {
+            Arrays.fill(d,-1);
+        }
+        // for(int i = 0;i<N;i++){
+        //     for(int j = 0;j<sum;j++){
+        //         dp[0][j] = false;
+        //         dp[i][0] = true;
+        //     }
+        // }
+int w= isPossible(arr,sum,N,dp);
+
+if(w==1)
+{
+    return true;
+}
+return false;
     }
+    static int isPossible(int[] arr,int sum,int N,int[][] dp){
+        if(sum<0)
+        {
+            return 0;
+        }
+        if(sum == 0){
+            return dp[N][sum]= 1;
+        }
+        if(N == 0){
+            return  dp[N][sum] = 0;
+        }
+        if(dp[N][sum]!= -1){
+            return dp[N][sum];
+        }
+        int taken = 0;
+        if(arr[N-1]<=sum){
+          taken = isPossible(arr,sum- arr[N-1],N-1,dp);
+        }
+        int notTaken = isPossible(arr,sum,N-1,dp);
+        if(taken ==1 || notTaken ==1)
+        {
+        return  dp[N][sum]=1;  
+        }
+        
+        return dp[N][sum] = 0;
+    }
+    
 }
