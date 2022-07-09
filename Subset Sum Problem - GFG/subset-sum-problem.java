@@ -51,10 +51,10 @@ class Solution{
         return false;
     }
     static int isPossible(int[] arr,int sum,int N,int[][] dp){
-        if(sum<0)
-        {
-            return 0;
-        }
+        // if(sum<0)
+        // {
+        //     return 0;
+        // }
         if(sum == 0){
             return dp[N][sum]= 1;
         }
