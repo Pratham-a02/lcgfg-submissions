@@ -1,16 +1,23 @@
 class Solution {
+    static int c;
     public int findTargetSumWays(int[] nums, int target) {
-        return TotalWays(nums,target,0);
+        c=0;
+        printTargetSumSubsets(nums,0,0,target);
+        return c;
     }
-    public int TotalWays(int[] nums,int target,int currIdx){
-        if(currIdx>= nums.length && target == 0)
-            return 1;
-        if(currIdx>= nums.length && target!= 0)
-            return 0 ;
-        
-        int pos = TotalWays(nums,target-nums[currIdx],currIdx+1);
-        int neg = TotalWays(nums,target+nums[currIdx],currIdx+1);
-        
-        return pos+neg;
+    public static void printTargetSumSubsets(int[] arr, int idx,  int sos, int tar) {
+    if (idx == arr.length)
+    {
+      if (sos == tar)
+      {
+        c++;
+      }
+      return;
     }
+    
+
+    printTargetSumSubsets(arr, idx + 1, sos + arr[idx], tar);
+    printTargetSumSubsets(arr, idx + 1, sos-arr[idx], tar);
+  }
+
 }
