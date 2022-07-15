@@ -34,7 +34,7 @@ class Solution{
             return 0;
         }
         if(currIdx>=price.length){
-            return 0;
+            return Integer.MIN_VALUE;
         }
         if(dp[currIdx][n]!= -1){
             return dp[currIdx][n];
