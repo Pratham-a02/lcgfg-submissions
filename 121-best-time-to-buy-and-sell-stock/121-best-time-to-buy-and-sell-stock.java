@@ -1,34 +1,32 @@
 class Solution {
-    public int maxProfit(int[] prices) {
-        return bestBuy(prices,0, 1, 1, new HashMap<String,Integer>());
-    }
-    public int bestBuy(int[] prices, int currentDay, int canBuy, int transCount, HashMap<String,Integer> memo){
-        
-     if(currentDay >= prices.length || transCount<=0)
-            return 0;
     
-        // String currentKey = Integer.toString(currentDay) + "" + Integer.toString(canBuy) + "" + Integer.toString(transCount);
-        // We Can't Use this Approach as it is giving TLE
+    public int maxProfit(int[] prices) {
+        // 
+        return bestTime(prices,0,1,1,new HashMap<String,Integer>());
+    }
+    
+    public int bestTime(int[] prices,int currDay,int canBuy,int transCount,HashMap<String,Integer>hm){
+        if(currDay>=prices.length || transCount<=0)
+            return 0;
+
         
-     String currentKey = currentDay + "_" + canBuy + "_" + transCount;
+        String currKey = currDay + "_" + canBuy + "_" + transCount;
         
-     if(memo.containsKey(currentKey))
-                return memo.get(currentKey);
+        if(hm.containsKey(currKey))
+            return hm.get(currKey);
         
-     if(canBuy==1){
-        int idle = bestBuy(prices, currentDay + 1, canBuy, transCount, memo);
-        int buy = bestBuy(prices, currentDay + 1, 0, transCount, memo) -prices[currentDay];
+        if(canBuy == 1){
+            int idle = bestTime(prices,currDay+1,canBuy,transCount,hm);
+            int buy =  bestTime(prices,currDay+1,0,transCount,hm)-prices[currDay];    
             
-                memo.put(currentKey,Math.max(idle,buy));
-                return memo.get(currentKey);
-            }
-     else{
-        int idle = bestBuy(prices, currentDay + 1, canBuy, transCount, memo);
-        int sell = bestBuy(prices, currentDay + 1, 1, transCount - 1, memo) + prices[currentDay];
-            
-            memo.put(currentKey,Math.max(idle,sell));
-            return memo.get(currentKey);
+            hm.put(currKey,Math.max(idle,buy));
+            return hm.get(currKey);
         }
-            
+        else{
+            int idle = bestTime(prices,currDay+1,canBuy,transCount,hm);
+            int sell = prices[currDay] + bestTime(prices,currDay+1,1,transCount-1,hm);
+            hm.put(currKey,Math.max(idle,sell));
+            return hm.get(currKey);
+        }
     }
 }
