@@ -1,31 +1,30 @@
 class Solution {
     public int maxProfit(int[] prices) {
-         int[][][] dp = new int[prices.length][2][3];
-        for(int i=0 ;i<prices.length ;i++){
-            for(int j=0; j<2;j++){
-                for(int k=0 ;k<3;k++){
-                    dp[i][j][k]=-1;
+        int[][][] dp = new int[prices.length+1][3][2];
+        for(int i = 0;i<prices.length;i++){
+            for(int j = 0;j<3;j++){
+                for(int k = 0;k<2;k++){
+                    dp[i][j][k] = -1;
                 }
             }
         }
-        return bestTime(prices,0,1,1,dp);
+        return bestTime(0,1,1,prices,dp);
     }
-    
-    public int bestTime(int[] prices,int currDay,int canBuy,int transCount,int[][][]dp){
+    public int bestTime(int currDay,int transCount,int canBuy,int[] prices,int[][][] dp){
         if(currDay>=prices.length || transCount<=0)
             return 0;
-        if(dp[currDay][canBuy][transCount]!= -1)
-            return dp[currDay][canBuy][transCount];
+        if(dp[currDay][transCount][canBuy]!= -1)
+            return dp[currDay][transCount][canBuy];
         
         if(canBuy == 1){
-            int idle = bestTime(prices,currDay+1,canBuy,transCount,dp);
-            int buy = -prices[currDay] + bestTime(prices,currDay+1,0,transCount,dp);    
-            return dp[currDay][canBuy][transCount] = Math.max(idle,buy);
+            int idle = bestTime(currDay+1,transCount,canBuy,prices,dp);
+            int buy = -prices[currDay] + bestTime(currDay+1,transCount,0,prices,dp);
+            return dp[currDay][transCount][canBuy] = Math.max(idle,buy);
         }
         else{
-            int idle = bestTime(prices,currDay+1,canBuy,transCount,dp);
-            int sell = prices[currDay] + bestTime(prices,currDay+1,1,transCount-1,dp);
-            return dp[currDay][canBuy][transCount] = Math.max(idle,sell);
+            int idle = bestTime(currDay+1,transCount,canBuy,prices,dp);
+            int sell = prices[currDay] + bestTime(currDay+1,transCount-1,1,prices,dp);
+            return dp[currDay][transCount][canBuy] = Math.max(idle,sell);
         }
     }
 }
