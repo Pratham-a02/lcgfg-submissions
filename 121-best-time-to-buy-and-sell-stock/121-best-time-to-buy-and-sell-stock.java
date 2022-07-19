@@ -1,32 +1,31 @@
 class Solution {
-    
     public int maxProfit(int[] prices) {
-        // 
-        return bestTime(prices,0,1,1,new HashMap<String,Integer>());
+         int[][][] dp = new int[prices.length][2][3];
+        for(int i=0 ;i<prices.length ;i++){
+            for(int j=0; j<2;j++){
+                for(int k=0 ;k<3;k++){
+                    dp[i][j][k]=-1;
+                }
+            }
+        }
+        return bestTime(prices,0,1,1,dp);
     }
     
-    public int bestTime(int[] prices,int currDay,int canBuy,int transCount,HashMap<String,Integer>hm){
+    public int bestTime(int[] prices,int currDay,int canBuy,int transCount,int[][][]dp){
         if(currDay>=prices.length || transCount<=0)
             return 0;
-
-        
-        String currKey = currDay + "_" + canBuy + "_" + transCount;
-        
-        if(hm.containsKey(currKey))
-            return hm.get(currKey);
+        if(dp[currDay][canBuy][transCount]!= -1)
+            return dp[currDay][canBuy][transCount];
         
         if(canBuy == 1){
-            int idle = bestTime(prices,currDay+1,canBuy,transCount,hm);
-            int buy =  bestTime(prices,currDay+1,0,transCount,hm)-prices[currDay];    
-            
-            hm.put(currKey,Math.max(idle,buy));
-            return hm.get(currKey);
+            int idle = bestTime(prices,currDay+1,canBuy,transCount,dp);
+            int buy = -prices[currDay] + bestTime(prices,currDay+1,0,transCount,dp);    
+            return dp[currDay][canBuy][transCount] = Math.max(idle,buy);
         }
         else{
-            int idle = bestTime(prices,currDay+1,canBuy,transCount,hm);
-            int sell = prices[currDay] + bestTime(prices,currDay+1,1,transCount-1,hm);
-            hm.put(currKey,Math.max(idle,sell));
-            return hm.get(currKey);
+            int idle = bestTime(prices,currDay+1,canBuy,transCount,dp);
+            int sell = prices[currDay] + bestTime(prices,currDay+1,1,transCount-1,dp);
+            return dp[currDay][canBuy][transCount] = Math.max(idle,sell);
         }
     }
 }
