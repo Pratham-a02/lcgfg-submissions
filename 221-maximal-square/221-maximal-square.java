@@ -4,7 +4,7 @@ class Solution {
         int side = 0;
         int m = matrix.length;
         int n = matrix[0].length;
-        int[][] dp = new int[m+1][n+1];
+        int[][] dp = new int[310][310];
         for(int[] d:dp)
             Arrays.fill(d,-1);
         
