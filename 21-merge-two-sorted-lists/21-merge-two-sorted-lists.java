@@ -8,27 +8,51 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        if(list1 == null || list2 == null){
-            return list1 != null ? list1 : list2;
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null){
+            return l2;
         }
-        ListNode c1 = list1, c2 = list2,dummy = new ListNode(-1),prev = dummy;
-        while(c1!= null && c2!= null){
-            if(c1.val<c2.val){
-                prev.next = c1;
-                c1 = c1.next;
+        
+        if(l2 == null){
+            return l1;
+        }
+        
+        ListNode dummyNode = new ListNode(-101);
+        ListNode head = dummyNode;
+        
+        while(l1 != null && l2 != null){
+            if(l1.val < l2.val){
+                ListNode newNode = new ListNode(l1.val);
+                dummyNode.next = newNode;
+                l1 = l1.next;
             }
             else{
-                prev.next = c2;
-                c2 = c2.next;
+                ListNode newNode = new ListNode(l2.val);
+                dummyNode.next = newNode;
+                l2 = l2.next;
             }
-            prev = prev.next;
+            dummyNode = dummyNode.next;
         }
-        prev.next = c1 != null ? c1:c2;
-        ListNode head = dummy.next;
-        // dummy.next = null;
         
-        return head;
+        if(l1 == null){
+            dummyNode.next = l2;
+        }
+        
+        if(l2==null){
+            dummyNode.next = l1;
+        }
+        
+        return head.next;
     }
 }
