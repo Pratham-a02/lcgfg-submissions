@@ -10,6 +10,7 @@
  */
 class Solution {
     public ListNode oddEvenList(ListNode head) {
+        if(head == null || head.next == null) return head;
         boolean odPos = true;
         ListNode dN1 = new ListNode(-1);
         ListNode dN2 = new ListNode(-1);
