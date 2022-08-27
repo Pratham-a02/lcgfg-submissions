@@ -13,6 +13,9 @@ class Solution {
             hm.put(s.charAt(i),i);
             
             a = i-left+1;
+            
+            
+            
             ans = Math.max(ans,a);
         }
         return ans;
