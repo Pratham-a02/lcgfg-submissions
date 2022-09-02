@@ -25,8 +25,9 @@ class Solution {
                 TreeNode node = queue.peek();
                 if(node.left!= null) queue.add(node.left);
                 if(node.right != null) queue.add(node.right);
-                sum += node.val;
+                
                 queue.remove();
+                sum += node.val;
             }
             ans.add(sum/n);
         }
