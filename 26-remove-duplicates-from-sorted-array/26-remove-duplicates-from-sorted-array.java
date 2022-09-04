@@ -9,7 +9,7 @@ class Solution {
             else if(nums[i] != nums[j]){
                 i++;
                 nums[i] = nums[j];
-                j++;
+                // j++;
             }
         }
         return (i+1);
