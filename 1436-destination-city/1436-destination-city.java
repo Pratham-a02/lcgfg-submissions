@@ -13,6 +13,6 @@ class Solution {
                 return paths.get(i).get(1);
             }
         }
-        return paths.get(paths.size()-1).get(1);
+        return "";
     }
 }
