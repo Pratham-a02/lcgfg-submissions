@@ -15,25 +15,30 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        if(root == null){
-            return new ArrayList<>();
-        }
-        LinkedHashMap<Integer,Integer> hm = new LinkedHashMap<>();
-        List<Integer> ans = new ArrayList<>();
-        rightView(root,1,hm,ans);
-        for(int val:hm.values()){
-            ans.add(val);
-        }
-        return ans;
+         if(root == null){
+          return new ArrayList<>();
+      }
+      ArrayList<Integer> ans = new ArrayList<>();
+      HashSet<Integer> hs = new HashSet<>();
+      leftSide(root,1,ans,hs);
+      return ans;
     }
-    
-    private void rightView(TreeNode root,int level,HashMap<Integer,Integer> hm,List<Integer> ans){
+    public static void leftSide(TreeNode root,int level,List<Integer> ans,HashSet<Integer> hs){
         if(root == null){
             return;
         }
-        hm.put(level,root.val);
-        rightView(root.left,level+1,hm,ans);
-        rightView(root.right,level+1,hm,ans);
-        return;
+        if(hs.contains(level)){
+            leftSide(root.right,level+1,ans,hs);
+            leftSide(root.left,level+1,ans,hs);
+            return;
+        }
+        else{
+            hs.add(level);
+            ans.add(root.val);
+            leftSide(root.right,level+1,ans,hs);
+            leftSide(root.left,level+1,ans,hs);
+            return;
+        }
+        // return;
     }
 }
