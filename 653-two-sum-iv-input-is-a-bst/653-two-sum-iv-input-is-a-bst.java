@@ -17,12 +17,20 @@ class Solution {
     public boolean findTarget(TreeNode root, int k) {
         List<Integer> al = new ArrayList<>();
         preOrder(root,al);
-        HashMap<Integer,Integer> hm = new HashMap<>();
-        for(int i = 0;i<al.size();i++){
-            if(hm.containsKey(k-al.get(i))){
+        int sum = 0;
+        int i = 0;
+        int j = al.size()-1;
+        while(i<j){
+            sum = al.get(i) + al.get(j);
+            if(sum <k){
+                i++;
+            }
+            else if(sum>k){
+                j--;
+            }
+            else if(sum == k){
                 return true;
             }
-            hm.put(al.get(i),hm.getOrDefault(al.get(i),0)+1);
         }
         return false;
     }
@@ -31,8 +39,9 @@ class Solution {
         if(root == null){
             return;
         }
-        al.add(root.val);
+
         preOrder(root.left,al);
+        al.add(root.val);
         preOrder(root.right,al);
         
         return;
