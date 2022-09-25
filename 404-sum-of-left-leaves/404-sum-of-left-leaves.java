@@ -18,11 +18,11 @@ class Solution {
         return totalSum(root,false);
     }
     
-    private int totalSum(TreeNode root,boolean rol){
+    private int totalSum(TreeNode root,boolean riOrle){
         if(root == null){
             return 0;
         }
-        if(root.left == null && root.right == null && rol == true){
+        if(root.left == null && root.right == null && riOrle == true){
             return root.val;
         }
         
