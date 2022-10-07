@@ -31,6 +31,6 @@ class Solution {
         if(ra == false){
             return false;
         }
-        return ra||la;
+        return ra&&la;
     }
 }
