@@ -137,15 +137,14 @@ class Tree
         if(root == null){
             return;
         }
-        if(hs.contains(level)){
-            leftview(root.left,level+1,ans,hs);
-            leftview(root.right,level+1,ans,hs);
-        }
-        else{
-            hs.add(level);
+        if(!hs.contains(level)){
             ans.add(root.data);
+            hs.add(level);
+        }
+        
+            
             leftview(root.left,level+1,ans,hs);
             leftview(root.right,level+1,ans,hs);
-        }
+        
     }
 }
