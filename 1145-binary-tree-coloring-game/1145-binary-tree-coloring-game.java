@@ -34,8 +34,8 @@ class Solution {
         int size = findSize(root,x);
         int exceptSide = n - (xkaleft+xkaright+1);
         int max = Math.max(exceptSide,Math.max(xkaleft,xkaright));
-        
-        if(max>n/2){
+        int rest = n - max;
+        if(max>rest){
             return true;
         }
         return false;
