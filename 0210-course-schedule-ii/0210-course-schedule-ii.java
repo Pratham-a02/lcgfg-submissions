@@ -10,7 +10,7 @@ class Solution {
             int u = edge[1];
             int v = edge[0];
             
-            graph.get(v).add(u);
+            graph.get(u).add(v);
         }
         
         return graph;
@@ -35,10 +35,10 @@ class Solution {
             }
         }
         
-        int idx = ans.length-1;
+        int idx = 0;
         while(qu.size()>0){
             int rem = qu.remove();
-            ans[idx--] = rem;
+            ans[idx++] = rem;
             
             for(int nbr:graph.get(rem)){
                 indegree[nbr]--;
@@ -48,7 +48,7 @@ class Solution {
                 }
             } 
         }
-        if(idx<0){
+        if(idx>=ans.length){
             return ans;
         }
         else{
