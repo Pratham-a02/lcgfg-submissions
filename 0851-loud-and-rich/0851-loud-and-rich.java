@@ -9,6 +9,11 @@ class Solution {
             graph.get(richer[i][1]).add(richer[i][0]);
         }
         Arrays.fill(ans,-1);
+        for(int i = 0;i<graph.size();i++){
+            if(graph.get(i).size() == 0){
+                ans[i] = i;
+            }
+        }
         for(int i = 0;i<ans.length;i++){
             if(ans[i] == -1){
                 ans[i] = dfs(i,graph,ans,quiet);
