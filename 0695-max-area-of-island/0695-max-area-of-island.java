@@ -2,18 +2,23 @@ class Solution {
     public int maxAreaOfIsland(int[][] grid){
         int m = grid.length;
         int n = grid[0].length;
-        int max = 0;
+        PriorityQueue<Integer> maxPQ = new PriorityQueue<>(Collections.reverseOrder()); 
+        // int max = 0;
         for(int i = 0;i<m;i++){
             for(int j = 0;j<n;j++){
                 if(grid[i][j] == 1){
                     int[] count = new int[1];
                     // count[0]+=1;
                     dfs(i,j,count,grid);
-                    max = Math.max(max,count[0]);
+                    // max = Math.max(max,count[0]);
+                    maxPQ.add(count[0]);
                 }
             }
         }
-        return max;
+        if(maxPQ.size() == 0){
+            return 0;
+        }
+        return maxPQ.peek();
     }
     
     public void dfs(int currRow,int currCol,int[] count,int[][] grid){
