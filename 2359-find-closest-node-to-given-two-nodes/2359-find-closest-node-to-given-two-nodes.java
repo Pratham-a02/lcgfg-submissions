@@ -10,11 +10,11 @@ class Solution {
         Arrays.fill(dist2,Integer.MAX_VALUE);
         dist2[node2]=0;
 
-        boolean[] visited = new boolean[n];
+        boolean[] visited1 = new boolean[n];
     
-        dfs(dist1,node1,visited,edges,0);
-
-        dfs(dist2,node2,visited,edges,0);
+        dfs(dist1,node1,visited1,edges,0);
+        boolean[] visited2 = new boolean[n];
+        dfs(dist2,node2,visited2,edges,0);
 
         int min=Integer.MAX_VALUE;int ans=-1;
         for(int i=0;i<n;i++){
@@ -41,6 +41,6 @@ class Solution {
             dfs(dist,dst,visited,edges,d+1);
         }
 
-        visited[src]=false;
+        // visited[src]=false;
     }
 }
