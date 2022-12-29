@@ -6,7 +6,9 @@ class Solution {
         int ri = nums.length-1;
         int ans = 0;
         while(li<ri){
-            ans += Math.abs(nums[ri--]-nums[li++]);
+            ans += Math.abs(nums[ri]-nums[li]);
+            li++;
+            ri--;
         }
         
         return ans;
