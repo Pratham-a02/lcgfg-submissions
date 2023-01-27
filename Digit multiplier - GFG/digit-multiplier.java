@@ -35,7 +35,7 @@ class Solution{
                 N = N/div;
             }
         }
-        if(N>=10){
+        if(N>=2){
             return "-1";
         }
         return sb.reverse().toString();
