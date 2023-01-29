@@ -69,9 +69,9 @@ class Solution {
                 hi = mid;
             }
         }
-        if(lo!=hi){
-            return -1;
-        }
+        // if(lo!=hi){
+        //     return -1;
+        // }
         return lo;
     }
 }
