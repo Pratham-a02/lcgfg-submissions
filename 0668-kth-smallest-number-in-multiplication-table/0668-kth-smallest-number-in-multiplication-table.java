@@ -4,7 +4,7 @@ class Solution {
         int hi = m*n;
         
         while(lo<hi){
-            int mid = (lo+hi)/2;
+            int mid = lo - (lo-hi)/2;
             int actual = 0;
             
             int j = n;
