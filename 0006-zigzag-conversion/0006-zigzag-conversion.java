@@ -1,8 +1,8 @@
 class Solution {
     public String convert(String s, int numRows) {
-        // if(s.length() <= numRows){
-        //     return s;
-        // }
+        if(s.length() <= numRows){
+            return s;
+        }
         char[][] mat = new char[numRows][s.length()/2+1000];
         for (int x = 0; x < mat.length; x++) {
             for (int y = 0; y < mat[0].length; y++){
