@@ -20,8 +20,8 @@ class Solution {
             step--;
             if (step == 0) {
                 jump++;
-                if (i >= maxReach)
-                    return -1;
+                // if (i >= maxReach)
+                //     return -1;
                 step = maxReach - i;
             }
         }
