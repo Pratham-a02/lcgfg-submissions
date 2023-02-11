@@ -28,18 +28,14 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    int MissingNumber(int[] array, int n) {
-        boolean[] vis = new boolean[n+1];
-        for(int i = 0;i<array.length;i++){
-            vis[array[i]] = true;
+    int MissingNumber(int array[], int n) {
+        int Sn = n*(n+1)/2;
+        
+        int sum = 0;
+        for(int val:array){
+            sum += val;
         }
-        int ans = 0;
-        for(int i = 1;i<vis.length;i++){
-            if(vis[i] == false){
-                ans = i;
-                break;
-            }
-        }
-        return ans;
+        
+        return Sn-sum;
     }
 }
