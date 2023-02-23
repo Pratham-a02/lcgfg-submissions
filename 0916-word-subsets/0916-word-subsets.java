@@ -8,11 +8,12 @@ class Solution {
             for(int i = 0;i<word.length();i++){
                 char ch = word.charAt(i);
                 temp[ch-'a']++;
+                target[ch-'a'] = Math.max(target[ch-'a'],temp[ch-'a']);
             }
             
-            for(int i = 0;i<26;i++){
-                target[i] = Math.max(target[i],temp[i]);
-            }
+//             for(int i = 0;i<26;i++){
+                
+//             }
         }
         
         for(String word:words1){
