@@ -4,8 +4,8 @@ class Solution {
         if (n <= 1)
            return 0;
  
-        if (arr[0] == 0)
-            return -1;
+        // if (arr[0] == 0)
+        //     return -1;
      
         int maxReach = arr[0];
         int step = arr[0];
