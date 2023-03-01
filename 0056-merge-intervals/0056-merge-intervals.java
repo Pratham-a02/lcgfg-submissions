@@ -1,6 +1,5 @@
 class Solution {
-    public int[][] merge(int[][] intervals){
-        List<int[]> al = new ArrayList<>();
+    public int[][] merge(int[][] intervals) {
         Arrays.sort(intervals,(a,b)->{
             if(a[0]<b[0]){
                 return -1;
@@ -12,7 +11,7 @@ class Solution {
                 return 1;
             }
         });
-        
+        List<int[]> ans = new ArrayList<>();
         int start = intervals[0][0];
         int end = intervals[0][1];
         
@@ -21,13 +20,14 @@ class Solution {
                 end = Math.max(end,arr[1]);
             }
             else{
-                int[] res = new int[]{start,end};
-                al.add(res);
+                int[] ar = new int[]{start,end};
+                ans.add(ar);
                 start = arr[0];
                 end = arr[1];
             }
         }
-        al.add(new int[]{start,end});
-        return al.toArray(new int[0][]);
+        
+        ans.add(new int[]{start,end});
+        return ans.toArray(new int[0][]);
     }
 }
