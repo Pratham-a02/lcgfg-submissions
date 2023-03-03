@@ -36,7 +36,7 @@ class GFG
 
 class Solution{
     public static ArrayList<Integer> search(String pat, String txt){
-        int[] lps = getLPS(pat);
+        int[] lps = getLPS(txt);
         ArrayList<Integer> ans = new ArrayList<>();
         int i = 0;
         int j = 0;
@@ -81,6 +81,9 @@ class Solution{
                 len = lps[len-1];
             }
         }
+        // for(int val:lps){
+        //     System.out.print(val+" ");
+        // }
         return lps;
     }
 }
