@@ -1,7 +1,6 @@
 class Solution {
     public int strStr(String txt, String pat) {
        int[] lps = getLPS(pat);
-        ArrayList<Integer> ans = new ArrayList<>();
         int i = 0;
         int j = 0;
         
