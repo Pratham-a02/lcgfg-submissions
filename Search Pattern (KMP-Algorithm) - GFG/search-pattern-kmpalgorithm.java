@@ -36,7 +36,9 @@ class GFG
 
 class Solution{
     public static ArrayList<Integer> search(String pat, String txt){
-        int[] lps = getLPS(txt);
+        // System.out.println(pat);
+        // System.out.println(txt);
+        int[] lps = getLPS(pat);
         ArrayList<Integer> ans = new ArrayList<>();
         int i = 0;
         int j = 0;
