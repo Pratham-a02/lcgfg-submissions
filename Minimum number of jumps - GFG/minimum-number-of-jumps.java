@@ -27,8 +27,7 @@ class GFG
 
 
 class Solution{
-    public static int minJumps(int[] arr){
-        int n = arr.length;
+    static int minJumps(int[] arr){
         if(arr.length<=1){
             return 0;
         }
@@ -42,13 +41,15 @@ class Solution{
         int steps = arr[0];
         
         int i = 1;
-        for (i = 1; i < n; i++) {
-            if (i == n - 1)
+        for(i = 1;i<arr.length;i++){
+            if(i == arr.length-1){
                 return jump;
+            }
             
-            maxReach = Math.max(maxReach, i + arr[i]);
             steps--;
-            if (steps == 0) {
+            maxReach = Math.max(maxReach,i+arr[i]);
+            
+            if(steps == 0){
                 jump++;
                 if(i>=maxReach){
                     return -1;
@@ -56,7 +57,6 @@ class Solution{
                 steps = maxReach - i;
             }
         }
-     
-        return -1;
+        return jump;
     }
 }
