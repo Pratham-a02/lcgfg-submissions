@@ -1,20 +1,17 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
         Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
         int i = 0;
-        int a = 0;
         for(i = 0;i<nums.length-2;i++){
-            List<Integer> curr = new ArrayList<>();
             if(i == 0 || (i>0 && nums[i] != nums[i-1])){
                 int lo = i+1;
                 int hi = nums.length - 1;
                 int target = -1*nums[i];
                 
                 while(lo<hi){
-                    if(nums[lo] + nums[hi] == target){
+                    if(nums[lo]+nums[hi] == target){
                         ans.add(Arrays.asList(nums[i],nums[lo],nums[hi]));
-                        
                         while(lo<hi && nums[lo] == nums[lo+1]){
                             lo++;
                         }
