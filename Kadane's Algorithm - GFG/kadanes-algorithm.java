@@ -30,19 +30,25 @@ class Main {
 
 
 class Solution{
-    public long maxSubarraySum(int arr[], int n){
-        int currSum = 0;
-        int max = Integer.MIN_VALUE;
+
+    // arr: input array
+    // n: size of array
+    //Function to find the sum of contiguous subarray with maximum sum.
+    long maxSubarraySum(int arr[], int n){
         
+        long max = Integer.MIN_VALUE;
+        int sum = 0;
         for(int i = 0;i<n;i++){
-            currSum += arr[i];
-            max = Math.max(max,currSum);
-            
-            if(currSum<0){
-                currSum = 0;
+            sum += arr[i];
+            if(sum>max){
+                max = sum;
+            }
+            if(sum<0){
+                sum = 0;
             }
         }
         return max;
     }
+    
 }
 
