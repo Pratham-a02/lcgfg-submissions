@@ -31,36 +31,23 @@ class Main
 //User function Template for Java
 
 class Solution{
-    public static boolean find3Numbers(int nums[], int n, int X) { 
-        Arrays.sort(nums);
+    public static boolean find3Numbers(int[] arr, int n, int X) { 
+        Arrays.sort(arr);
         int i = 0;
-        int a = 0;
-        for(i = 0;i<nums.length-2;i++){
-            List<Integer> curr = new ArrayList<>();
-            if(i == 0 || (i>0 && nums[i] != nums[i-1])){
+        for(i = 0;i<arr.length-2;i++){
+            if(i == 0 || arr[i] != arr[i-1]){
                 int lo = i+1;
-                int hi = nums.length - 1;
-                int target = X-nums[i];
-                
+                int hi = n-1;
+                int target = X - arr[i];
                 while(lo<hi){
-                    if(nums[lo] + nums[hi] == target){
+                    if(arr[lo]+arr[hi] == target){
                         return true;
-                        // break;
-                        
-                        // while(lo<hi && nums[lo] == nums[lo+1]){
-                        //     lo++;
-                        // }
-                        // while(lo<hi && nums[hi] == nums[hi-1]){
-                        //     hi--;
-                        // }
-                        // lo++;
-                        // hi--;
                     }
-                    else if(nums[lo]+nums[hi]<target){
-                        lo++;
+                    else if(arr[lo]+arr[hi]>target){
+                        hi--;
                     }
                     else{
-                        hi--;
+                        lo++;
                     }
                 }
             }
