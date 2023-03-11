@@ -42,42 +42,30 @@ class Array {
 }
 
 // } Driver Code Ends
-
-
-//User function Template for Java
-
-
-
 class Complete{
-    public static int minSwap (int nums[], int n, int k) {
+    public static int minSwap (int nums[], int n, int k){
         int count = 0;
-        int min = Integer.MAX_VALUE;
         for(int i = 0;i<n;i++){
             if(nums[i]<=k){
                 count++;
             }
         }
-        
-        int left = 0;
         int bad = 0;
-        
+        int min = Integer.MAX_VALUE;
+        int left = 0;
         for(int right = 0;right<n;right++){
-            
-            if(nums[right] >k){
+            if(nums[right]>k){
                 bad++;
             }
             
             while(right-left+1>count){
                 if(nums[left]>k){
-                    bad = bad-1;
-                    left++;
+                    bad--;
                 }
-                else{
-                    left++;
-                }
+                left++;
             }
             
-            if(right - left + 1 == count){
+            if(right - left +1 == count){
                 min = Math.min(min,bad);
             }
         }
