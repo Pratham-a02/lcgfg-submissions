@@ -9,32 +9,28 @@ import java.io.*;
 // } Driver Code Ends
 //User function Template for Java
 
-class Solution{
-    public static int maxSubStr(String str){
+class Solution {
+    public static int maxSubStr(String str) {
        int count0 = 0;
        int count1 = 0;
        int count = 0;
-       
        for(int i = 0;i<str.length();i++){
            if(str.charAt(i) == '0'){
                count0++;
            }
-           if(str.charAt(i) == '1'){
+           else{
                count1++;
            }
            
            if(count0 == count1){
                count++;
-               count0 = 0;
-               count1 = 0;
+               count0 = count1 = 0;
            }
        }
-       if(count==0||count0!=0||count1!=0){
-            return -1;
-        }
-        else{
-            return count;
-        }
+       if(count == 0 || count0 != 0 || count1!=0){
+           return -1;
+       }
+       return count;
     }
 }
 
