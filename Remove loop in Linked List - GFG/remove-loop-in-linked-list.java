@@ -127,15 +127,8 @@ class Solution{
             temp2 = temp2.next;
         }
         
-        Node t = head;
-        int counter = 0;
-        while(counter != 2){
-            if(t.next == temp1){
-                counter++;
-            }
-            if(counter == 2){
-                break;
-            }
+        Node t = temp1;
+        while(t.next != temp2){
             t = t.next;
         }
         t.next = null;
