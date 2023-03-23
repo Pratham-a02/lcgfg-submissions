@@ -31,38 +31,45 @@ class Node
 */
 class Solution{
 	public static int countPairs(Node root1, Node root2, int x){
-	    count = 0;
-		HashMap<Integer,Integer> hm = new HashMap<>();
-		populateMap(root1,hm);
-		total(root2,x,hm);
-		return count;
+	    int[] count = new int[1];
+		inorder(root1,root2,x,count);
+		return count[0];
 	}
-	static int count;
-	public static void populateMap(Node root,HashMap<Integer,Integer> hm){
-	    if(root == null){
+	
+	public static void inorder(Node root1,Node root2,int x,int[] count){
+	    if(root1 == null){
 	        return;
 	    }
 	    
-	    hm.put(root.data,hm.getOrDefault(root.data,0)+1);
-	    populateMap(root.left,hm);
-	    populateMap(root.right,hm);
-	    
+	    inorder(root1.left,root2,x,count);
+	    int val = x - root1.data;
+	    boolean ans = isFound(root2,val);
+	    if(ans){
+	        count[0]+=1;
+	    }
+	    inorder(root1.right,root2,x,count);
 	    return;
 	}
 	
-	public static void total(Node root,int x,HashMap<Integer,Integer> hm){
+	public static boolean isFound(Node root,int x){
 	    if(root == null){
-	        return;
+	        return false;
 	    }
 	    
-	    if(hm.containsKey(x - root.data)){
-	        count++;
+	    if(root.data == x){
+	        return true;
+	    }
+	    boolean a = false;
+	    boolean b = false;
+	    
+	    if(root.data>x){
+	        a = isFound(root.left,x);
+	    }
+	    else if(root.data<x){
+	        b = isFound(root.right,x);
 	    }
 	    
-	    total(root.left,x,hm);
-	    total(root.right,x,hm);
-	    
-	    return;
+	    return (a||b);
 	}
 }
 
