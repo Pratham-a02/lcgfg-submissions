@@ -111,21 +111,23 @@ class GfG {
 class Solution{
     int getCount(Node root,int l, int h){
         int[] count = new int[1];
-        inorder(root,l,h,count);
-        return count[0];
+        return inorder(root,l,h);
+        // return count[0];
     }
     
-    public void inorder(Node root,int l,int h,int[] count){
+    public int inorder(Node root,int l,int h){
         if(root == null){
-            return;
+            return 0;
         }
         
-        inorder(root.left,l,h,count);
-        if(root.data >= l && root.data <= h){
-            count[0]++;
+        if(root.data >=l && root.data<=h){
+            return 1 + inorder(root.left,l,h) + inorder(root.right,l,h);
         }
-        inorder(root.right,l,h,count);
-        
-        return;
+        else if(root.data<l){
+            return inorder(root.right,l,h);
+        }
+        else{
+            return inorder(root.left,l,h);
+        }
     }
 }
