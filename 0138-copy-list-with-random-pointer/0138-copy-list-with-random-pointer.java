@@ -40,7 +40,7 @@ class Solution{
             prev = prev.next;
             curr = curr.next;
         }
-        prev.next = curr;
+        // prev.next = curr;
         return dummy.next;
     }
 }
