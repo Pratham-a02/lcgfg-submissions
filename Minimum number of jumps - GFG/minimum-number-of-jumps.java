@@ -28,7 +28,7 @@ class GFG
 
 class Solution{
     static int minJumps(int[] arr){
-        if(arr.length<=1){
+        if(arr.length==1){
             return 0;
         }
         if(arr[0] == 0){
