@@ -57,7 +57,7 @@ class Solution{
                 }
             }
             if(fi!= -1){
-                int size = nums.length - fi;
+                int size = num.length - fi;
                 if(size>max){
                     max = size;
                     ans = k;
