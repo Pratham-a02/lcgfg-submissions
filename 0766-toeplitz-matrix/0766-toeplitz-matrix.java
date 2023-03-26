@@ -1,29 +1,16 @@
 class Solution {
     public boolean isToeplitzMatrix(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
         boolean flag = false;
-        HashMap<Integer,List<Integer>> hm = new HashMap<>();
-        for(int i = 0;i<matrix.length;i++){
-            for(int j = 0;j<matrix[0].length;j++){
-                int gap = i-j;
-                if(hm.containsKey(gap)){
-                    if(matrix[i][j] != hm.get(gap).get(0)){
-                        flag = true;
-                        break;
-                    }
-                    hm.get(gap).add(matrix[i][j]);
-                }
-                else{
-                    hm.put(gap,new ArrayList<>());
-                    hm.get(gap).add(matrix[i][j]);
+        
+        for(int i = 0;i<m-1;i++){
+            for(int j = 0;j<n-1;j++){
+                if(matrix[i][j] != matrix[i+1][j+1]){
+                    return false;
                 }
             }
         }
-        
-        if(flag){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return true;
     }
 }
