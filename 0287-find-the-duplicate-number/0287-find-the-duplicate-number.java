@@ -1,17 +1,13 @@
 class Solution {
-    public int findDuplicate(int[] nums){
-        int max = Integer.MIN_VALUE;
-        for(int num:nums){
-            max = Math.max(max,num);
-        }
-        
-        int[] arr = new int[max+1];
-        for(int num:nums){
-            if(arr[num]<0){
-                return num;
+    public int findDuplicate(int[] nums) {
+        for(int i = 0;i<nums.length;i++){
+            int val = Math.abs(nums[i]);
+            int idx = val-1;
+            
+            if(nums[idx] < 0){
+                return idx+1;
             }
-            int nnum = -1*num;
-            arr[num] = nnum;
+            nums[idx] = -1*nums[idx];
         }
         return 0;
     }
