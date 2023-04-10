@@ -12,14 +12,10 @@ class Solution {
         }
         
         if(open != 0){
-            String op1 = str;
-            op1 += "(";
-            solve(open-1,close,op1,ans);
+            solve(open-1,close,str+"(",ans);
         }
-        if(close > open){
-            String op1 = str;
-            op1 += ")";
-            solve(open,close-1,op1,ans);
+        if(close >open){
+            solve(open,close-1,str+")",ans);
         }
         
         return;
