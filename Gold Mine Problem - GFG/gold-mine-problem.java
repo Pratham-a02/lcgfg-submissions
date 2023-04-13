@@ -47,13 +47,14 @@ class Solution{
     }
     
     public static int max(int currRow,int currCol,int[][] mat,int[][] dp) {
-        if(currRow == mat.length-1 && currCol == mat[0].length-1){
-            return dp[currRow][currCol] = mat[currRow][currCol];
-        }
-        
         if(currRow<0 || currRow>=mat.length || currCol>=mat[0].length){
             return 0;
         }
+        if(currCol == mat[0].length-1){
+            return dp[currRow][currCol] = mat[currRow][currCol];
+        }
+        
+        
         
         if(dp[currRow][currCol] != 0){
             return dp[currRow][currCol];
