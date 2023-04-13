@@ -1,27 +1,18 @@
 class Solution {
-    public int minCostClimbingStairs(int[] cost) {
+    public int minCostClimbingStairs(int[] cost){
         int[] dp = new int[cost.length+1];
-        Arrays.fill(dp,-1);
-        int zero = MinCost(0,cost,dp);
-        int one = MinCost(1,cost,dp);
-        return Math.min(zero,one);
+        return minCost(cost.length,cost,dp);
     }
     
-    public int MinCost(int idx,int[] cost,int[] dp){
-        if(idx == cost.length){
-            return 0;
-        }
-        if(idx>cost.length){
-            return (int)1e9;
+    public int minCost(int n,int[] cost,int[] dp){
+        if(n<=1){
+            return dp[n] = cost[n];
         }
         
-        if(dp[idx] != -1){
-            return dp[idx];
+        if(dp[n] != 0){
+            return dp[n];
         }
         
-        int oneStep = cost[idx] + MinCost(idx+1,cost,dp);
-        int twoStep = cost[idx] + MinCost(idx+2,cost,dp);
-        
-        return dp[idx] = Math.min(oneStep,twoStep);
+        return dp[n] = Math.min(minCost(n-1,cost,dp),minCost(n-2,cost,dp)) + (n == cost.length?0:cost[n]);
     }
 }
