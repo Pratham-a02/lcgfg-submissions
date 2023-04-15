@@ -26,7 +26,7 @@ class Solution{
                 sum += asc_val;
             }
             
-            if(sum>max){
+            if(sum>=max){
                 max = sum;
                 start = s;
                 end = i+1;
