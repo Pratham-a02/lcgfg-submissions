@@ -24,28 +24,32 @@ import java.util.*;
 // } Driver Code Ends
 
 
-class Solution {
-    // Function to find maximum product subarray
-    public long maxProduct(int[] arr, int n) {
-        long max = Integer.MIN_VALUE;
+class Solution{
+    long maxProduct(int[] arr, int n){
+        long res = Integer.MIN_VALUE;
+        
         long prod = 1;
+        
         for(int i = 0;i<n;i++){
             prod = prod*arr[i];
-            max = Math.max(max,prod);
-            if(prod == 0){
+            res = Math.max(prod,res);
+            
+            if(prod==0){
                 prod = 1;
             }
         }
         
         prod = 1;
+        
         for(int i = n-1;i>=0;i--){
             prod = prod*arr[i];
-            max = Math.max(max,prod);
-            if(prod == 0){
+            res = Math.max(prod,res);
+            
+            if(prod==0){
                 prod = 1;
             }
         }
         
-        return max;
+        return res;
     }
 }
