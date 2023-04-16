@@ -14,7 +14,7 @@ class Solution {
             }
         }
         
-        if(osum<0){
+        if(osum<0 || si == gas.length){
             return -1;
         }
         return si;
