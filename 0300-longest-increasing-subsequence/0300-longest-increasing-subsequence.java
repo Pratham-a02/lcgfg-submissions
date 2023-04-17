@@ -13,8 +13,8 @@ class Solution {
             return dp[i];
         }
         int longestLen = 1;
-        for(int j = i-1;j>=0;j--){
-            if(nums[j]<nums[i]){
+        for(int j = i+1;j<nums.length;j++){
+            if(nums[i]<nums[j]){
                 int len = 1 + LIS_R(j,nums,dp);
                 longestLen = Math.max(len,longestLen);
             }
