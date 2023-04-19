@@ -31,10 +31,11 @@ class Solution{
         for(int[]d:dp){
             Arrays.fill(d,-1);
         }
-        return mcm(0,N-1,arr,dp);
+        // mcm(0,N-1,arr,dp);
+        return mcm_Tab(0,N-1,arr,dp);
     }
     
-    public static int mcm(int si,int ei,int[] arr,int[][] dp){
+    public static int mcm_M(int si,int ei,int[] arr,int[][] dp){
         if(ei-si == 1 || ei == si){
             return dp[si][ei] = 0;
         }
@@ -45,12 +46,36 @@ class Solution{
         
         int minCost = (int)1e9;
         for(int cut = si+1;cut<ei;cut++){
-            int leftSide = mcm(si,cut,arr,dp);
-            int rightSide = mcm(cut,ei,arr,dp);
+            int leftSide = mcm_M(si,cut,arr,dp);
+            int rightSide = mcm_M(cut,ei,arr,dp);
             
             minCost = Math.min(minCost,leftSide + arr[si] * arr[cut] * arr[ei] + rightSide);
         }
         
         return dp[si][ei] = minCost;
+    }
+    
+    
+    public static int mcm_Tab(int SI,int EI,int[] arr,int[][] dp){
+        int n = arr.length;
+        
+        for(int gap = 1;gap<n;gap++){
+            for(int si = 0,ei = gap;ei<n;si++,ei++){
+                if(si == ei || ei - si == 1){
+                    dp[si][ei] = 0;
+                    continue;
+                }
+                
+                int minCost = (int)1e9;
+                for(int cut = si+1;cut<ei;cut++){
+                    int left = dp[si][cut];
+                    int right = dp[cut][ei];
+                    
+                    minCost = Math.min(minCost,left + arr[si]*arr[cut]*arr[ei] + right);
+                    dp[si][ei] = minCost;
+                }
+            }
+        }
+        return dp[SI][EI];
     }
 }
