@@ -35,7 +35,7 @@ class Solution{
     }
     
     public static int mcm(int si,int ei,int[] arr,int[][] dp){
-        if(ei-si == 1){
+        if(ei-si == 1 || ei == si){
             return dp[si][ei] = 0;
         }
         
