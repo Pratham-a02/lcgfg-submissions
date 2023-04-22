@@ -37,20 +37,22 @@ class Solution{
         String res = lookandsay(n-1);
         String curr = "";
         int count = 1;
-        for(int i = 1;i<res.length();i++){
-            if(res.charAt(i) != res.charAt(i-1)){
+        int i = 1;
+        while(i<res.length()){
+            if(res.charAt(i) == res.charAt(i-1)){
+                count++;
+            }
+            else{
                 curr += count;
                 curr += res.charAt(i-1);
                 count = 1;
-            }
-            else{
-                count++;
             }
             
             if(i == res.length()-1){
                 curr += count;
                 curr += res.charAt(i);
             }
+            i++;
         }
         return curr;
     }
