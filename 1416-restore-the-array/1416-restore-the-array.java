@@ -14,7 +14,7 @@ class Solution {
         String mx = Integer.toString(k);
         int mxSize = mx.length();
         int[] dp = new int[s.length()+1];
-        Arrays.fill(dp,-1);
+        // Arrays.fill(dp,-1);
         return totalWays(0,s,k,mxSize,dp);
     }
     
@@ -23,7 +23,7 @@ class Solution {
             return dp[idx] = 1;
         }
         
-        if(dp[idx] != -1){
+        if(dp[idx] != 0){
             return dp[idx];
         }
         
