@@ -19,27 +19,28 @@ class Node {
 */
 
 class Solution {
-    public Node cloneGraph(Node node){
-        if(node == null)
+    public Node cloneGraph(Node node) {
+        if(node == null){
             return null;
+        }
         HashMap<Integer,Node> hm = new HashMap<>();
         return helper(node,hm);
     }
     
     public Node helper(Node node,HashMap<Integer,Node> hm){
-        Node nodeClone = new Node(node.val);
-        hm.put(node.val,nodeClone);
+        Node cloneNode = new Node(node.val);
+        hm.put(node.val,cloneNode);
         
         for(Node nbr:node.neighbors){
-            if(!hm.containsKey(nbr.val)){
-                Node nbrClone = helper(nbr,hm);
-                nodeClone.neighbors.add(nbrClone);
+            if(hm.containsKey(nbr.val) == false){
+                Node cloneNbr = helper(nbr,hm);
+                cloneNode.neighbors.add(cloneNbr);
             }
             else{
-                Node nbrClone = hm.get(nbr.val);
-                nodeClone.neighbors.add(nbrClone);
+                Node cloneNbr = hm.get(nbr.val);
+                cloneNode.neighbors.add(cloneNbr);
             }
         }
-        return nodeClone;
+        return cloneNode;
     }
 }
