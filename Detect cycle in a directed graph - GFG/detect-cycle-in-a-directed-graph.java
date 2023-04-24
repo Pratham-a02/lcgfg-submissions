@@ -28,41 +28,41 @@ class DriverClass {
 }
 // } Driver Code Ends
 
-
-/*Complete the function below*/
-
-class Solution {
-    int[] vis;
+class Solution{
     public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj){
-        boolean ans = false;
-        vis = new int[V];
-        for(int v = 0;v<V;v++){
-            boolean isCycle = dfs(v,adj);
-            if(isCycle){
-                ans = true;
+        boolean[] vis = new boolean[V];
+        boolean[] pathVis = new boolean[V];
+        
+        for(int i = 0;i<V;i++){
+            if(vis[i]){
+                continue;
             }
-        }
-        return ans;
-    }
-    
-    public boolean dfs(int v,ArrayList<ArrayList<Integer>> adj){
-        if(vis[v] == 2){
-            return false;
-        }
-        if(vis[v] == 1){
-            return true;
-        }
-        else{
-            vis[v] = 1;
-            for(int nbr:adj.get(v)){
-                boolean isPossible = dfs(nbr,adj);
-                
-                if(isPossible){
+            if(!vis[i]){
+                if(dfs(i,adj,vis,pathVis)){
                     return true;
                 }
             }
-            vis[v] = 2;
-            return false;
         }
+        return false;
+    }
+    
+    public boolean dfs(int vert,ArrayList<ArrayList<Integer>> adj,boolean[] vis,boolean[] pathVis){
+        vis[vert] = true;
+        pathVis[vert] = true;
+        
+        for(int nbr:adj.get(vert)){
+            if(!vis[nbr]){
+                if(dfs(nbr,adj,vis,pathVis)){
+                    return true;
+                }
+            }
+            else{
+                if(pathVis[nbr] == true){
+                    return true;
+                }
+            }
+        }
+        pathVis[vert] = false;
+        return false;
     }
 }
