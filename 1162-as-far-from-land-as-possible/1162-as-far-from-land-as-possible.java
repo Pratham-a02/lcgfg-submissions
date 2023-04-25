@@ -44,16 +44,16 @@ class Solution {
             vis[rem.x][rem.y] = true;
             grid[rem.x][rem.y] = rem.dist;
             
-            if(rem.x-1>=0 && grid[rem.x-1][rem.y]!=1){
+            if(rem.x-1>=0){// && grid[rem.x-1][rem.y]!=1){
                 qu.add(new Pair(rem.x-1,rem.y,rem.dist+1));
             }
-            if(rem.x+1<grid.length && grid[rem.x+1][rem.y]!=1){
+            if(rem.x+1<grid.length){// && grid[rem.x+1][rem.y]!=1){
                 qu.add(new Pair(rem.x+1,rem.y,rem.dist+1));
             }
-            if(rem.y-1>=0 && grid[rem.x][rem.y-1]!=1){
+            if(rem.y-1>=0){// && grid[rem.x][rem.y-1]!=1){
                 qu.add(new Pair(rem.x,rem.y-1,rem.dist+1));
             }
-            if(rem.y+1<grid[0].length && grid[rem.x][rem.y+1]!=1){
+            if(rem.y+1<grid[0].length){// && grid[rem.x][rem.y+1]!=1){
                 qu.add(new Pair(rem.x,rem.y+1,rem.dist+1));
             }
         }
