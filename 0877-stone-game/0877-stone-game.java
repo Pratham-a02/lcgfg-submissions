@@ -1,30 +1,32 @@
 class Solution {
-    public boolean stoneGame(int[] piles){
-        if(piles.length == 0)
-            return true;
-        int n = piles.length;
-        return findWinner(0,n-1,true,0,0,piles,new HashMap<String,Boolean>());
+    public boolean stoneGame(int[] piles) {
+        return willWin(0,0,0,piles.length-1,true,piles,new HashMap<>());
     }
-    public boolean findWinner(int start,int end,boolean isAlice,int aliceScore,int bobScore,int[]piles,HashMap<String,Boolean>hm){
-        if(start > end){
-            return aliceScore>bobScore?true:false;
+    
+    public boolean willWin(int aScore,int bScore,int start,int end,boolean canBuy,int[] piles,HashMap<String,Boolean> hm){
+        if(start>end){
+            return aScore>bScore?true:false;
         }
         
         String currKey = start + "_" + end;
         
-        if(hm.containsKey(currKey))
+        if(hm.containsKey(currKey)){
             return hm.get(currKey);
-        if(isAlice){
-            boolean s = findWinner(start+1,end,false,aliceScore+piles[start],bobScore,piles,hm);
-            boolean e = findWinner(start,end-1,false,aliceScore+piles[end],bobScore,piles,hm);
-            hm.put(currKey,s||e);
-            return s||e;
+        }
+        
+        if(canBuy){
+            boolean st = willWin(aScore+piles[start],bScore,start+1,end,false,piles,hm);
+            boolean ed = willWin(aScore+piles[end],bScore,start,end-1,false,piles,hm);
+            
+            hm.put(currKey,(st || ed));
+            return (st || ed);
         }
         else{
-            boolean s = findWinner(start+1,end,true,aliceScore,bobScore+piles[start],piles,hm);
-            boolean e = findWinner(start,end-1,true,aliceScore,bobScore+piles[end],piles,hm);
-            hm.put(currKey,s||e);
-            return s||e;
+            boolean st = willWin(aScore,bScore+piles[start],start+1,end,true,piles,hm);
+            boolean ed = willWin(aScore,bScore+piles[end],start,end-1,true,piles,hm);
+            
+            hm.put(currKey,(st || ed));
+            return (st || ed);
         }
     }
 }
