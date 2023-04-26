@@ -1,51 +1,52 @@
 class Solution {
-    public int[] findRedundantConnection(int[][] edges){
-        int n = edges.length;
-        int[] parent = new int[n+1];
-        int[] rank = new int[n+1];
+    int[] parent;
+    int[] rank;
+    
+    public int[] findRedundantConnection(int[][] edges) {
+        parent = new int[edges.length+1];
+        rank = new int[edges.length+1];
         
-        Arrays.fill(rank,0);
-        for(int i = 0;i<n;i++){
+        for(int i = 0;i<parent.length;i++){
             parent[i] = i;
+            rank[i] = 0;
         }
         
-        for(int[]edge:edges){
-            int x = edge[0];
-            int y = edge[1];
+        for(int[] edge:edges){
+            int xl = find(edge[0]);
+            int yl = find(edge[1]);
             
-            int xLead = find(x,parent);
-            int yLead = find(y,parent);
-            
-            if(xLead != yLead){
-                union(xLead,yLead,parent,rank);
+            if(xl != yl){
+                union(xl,yl);
             }
-            else if(xLead == yLead){
-                return new int[]{x,y};
+            else{
+                return edge;
             }
         }
-        return new int[]{};
+        return null;
     }
     
-    public int find(int x,int[] parent){
+    public int find(int x){
         if(parent[x] == x){
             return x;
         }
         else{
-            parent[x] = find(parent[x],parent);
+            parent[x] = find(parent[x]);
             return parent[x];
         }
     }
     
-    public void union(int x,int y,int[] parent,int[] rank){
-        if(rank[x]<rank[y]){
-            parent[x] = y;
+    public void union(int s1,int s2){
+        if(rank[s1] < rank[s2]){
+            parent[s1] = s2;
+            rank[s2]++;
         }
-        else if(rank[y]<rank[x]){
-            parent[y] = x;
+        else if(rank[s2] < rank[s1]){
+            parent[s2] = s1;
+            rank[s1]++;
         }
         else{
-            parent[y] = x;
-            rank[x]++;
+            parent[s2] = s1;
+            rank[s1]++;
         }
     }
 }
