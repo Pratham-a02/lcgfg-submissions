@@ -79,12 +79,10 @@ class GFG {
 
 // } Driver Code Ends
 
-
-//User function Template for Java
-
 class Solution{
     public String findOrder(String [] dict, int N, int K){
-        ArrayList<Integer>[] graph = (ArrayList<Integer>[])new ArrayList[K];
+        ArrayList<Integer>[] graph = (ArrayList<Integer>[])new ArrayList[K];        
+        
         for(int i = 0;i<K;i++){
             graph[i] = new ArrayList<>();
         }
@@ -97,39 +95,38 @@ class Solution{
                 char ch1 = w1.charAt(j);
                 char ch2 = w2.charAt(j);
                 
-                if(ch1!=ch2){
-                    graph[ch1 - 'a'].add(ch2 - 'a');
+                if(ch1 != ch2){
+                    graph[ch1-'a'].add(ch2-'a');
                     break;
                 }
             }
         }
         
-        boolean[] visited = new boolean[K];
+        boolean[] vis = new boolean[K];
         Stack<Integer> st = new Stack<>();
-        
         for(int v = 0;v<K;v++){
-            if(visited[v] == false){
-                dfs(v,visited,st,graph);
+            if(!vis[v]){
+                dfs(v,vis,st,graph);
             }
         }
         
         String ans = "";
         while(st.size()>0){
-            ans += (char)(st.pop() + 'a');
+            char ch = (char)(st.pop()+'a');
+            ans += ch;
         }
-        
         return ans;
     }
     
-    public void dfs(int v,boolean[] visited,Stack<Integer> st,ArrayList<Integer>[] graph){
-        visited[v] = true;
+    public void dfs(int v,boolean[] vis,Stack<Integer> st,ArrayList<Integer>[] graph){
+        vis[v] = true;
         
         for(int nbr:graph[v]){
-            if(visited[nbr] == false){
-                dfs(nbr,visited,st,graph);
+            if(!vis[nbr]){
+                dfs(nbr,vis,st,graph);
             }
         }
-        
         st.push(v);
+        return;
     }
 }
