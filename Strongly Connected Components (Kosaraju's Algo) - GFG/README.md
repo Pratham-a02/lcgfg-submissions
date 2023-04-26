@@ -33,7 +33,7 @@ You don't need to read input or print anything. Your task is to complete the fun
 &nbsp;</p>
 
 <p><span style="font-size:18px"><strong>Expected Time Complexity:</strong>&nbsp;O(V+E).<br>
-<strong>Expected Auxiliary Space:</strong>&nbsp;O(V).</span><br>
+<strong>Expected Auxiliary Space:</strong>&nbsp;O(V+E).</span><br>
 &nbsp;</p>
 
 <p><span style="font-size:18px"><strong>Constraints:</strong><br>
