@@ -39,57 +39,61 @@ class Gfg
 }
 
 // } Driver Code Ends
+
 class Solution{
-    
     public int kosaraju(int V, ArrayList<ArrayList<Integer>> adj){
-        Stack<Integer> st = new Stack<>();
         boolean[] vis1 = new boolean[V];
+        Stack<Integer> st = new Stack<>();
         for(int v = 0;v<V;v++){
-            if(vis1[v] == false){
-                dfs1(v,adj,st,vis1);
+            if(!vis1[v]){
+                dfs(v,adj,st,vis1);
             }
         }
-        ArrayList<ArrayList<Integer>> tsp = new ArrayList<>();
+        
+        ArrayList<ArrayList<Integer>> adj1 = new ArrayList<>();
+        
         for(int v = 0;v<V;v++){
-            tsp.add(new ArrayList<>());
+            adj1.add(new ArrayList<>());
         }
         
         for(int v = 0;v<V;v++){
             for(int nbr:adj.get(v)){
-                tsp.get(nbr).add(v);
+                adj1.get(nbr).add(v);
             }
         }
+        
         boolean[] vis2 = new boolean[V];
         int count = 0;
         while(st.size()>0){
-            int vert = st.pop();
-            if(vis2[vert] == false){
-                dfs2(vert,tsp,vis2);
+            int v = st.pop();
+            if(!vis2[v]){
+                dfs_(v,adj1,vis2);
                 count++;
             }
         }
         return count;
     }
     
-    public void dfs2(int vert,ArrayList<ArrayList<Integer>> tsp,boolean[] vis){
-        vis[vert] = true;
-        for(int nbr:tsp.get(vert)){
-            if(vis[nbr] == false){
-                dfs2(nbr,tsp,vis);
+    public void dfs_(int v,ArrayList<ArrayList<Integer>> adj1,boolean[] vis2){
+        vis2[v] = true;
+        
+        for(int nbr:adj1.get(v)){
+            if(!vis2[nbr]){
+                dfs_(nbr,adj1,vis2);
             }
         }
-        return;
     }
     
-    public void dfs1(int v,ArrayList<ArrayList<Integer>> adj,Stack<Integer> st,boolean[] vis){
+    public void dfs(int v,ArrayList<ArrayList<Integer>> adj,Stack<Integer> st,boolean[] vis){
         vis[v] = true;
         
         for(int nbr:adj.get(v)){
-            if(vis[nbr] == false){
-                dfs1(nbr,adj,st,vis);
+            if(!vis[nbr]){
+                dfs(nbr,adj,st,vis);
             }
         }
-        
         st.push(v);
+        
+        return;
     }
 }
