@@ -20,7 +20,7 @@ class Solution {
                     }
                     idx++;
                 }
-                if(count <= 2){
+                if(count == 2){
                 String firstLead = find(first);
                 String secondLead = find(second);
                 
