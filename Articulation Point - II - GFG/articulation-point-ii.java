@@ -69,7 +69,7 @@ class Solution{
     int time = 0;
     public void dfs(ArrayList<ArrayList<Integer>> adj,int[] low,int[] dis,boolean[] visited,boolean[] aps,int currVert,int parent){
         visited[currVert] = true;
-        dis[currVert] = low[currVert] = ++time;
+        dis[currVert] = low[currVert] = time++;
         
         int count = 0;
         for(int nbr:adj.get(currVert)){
