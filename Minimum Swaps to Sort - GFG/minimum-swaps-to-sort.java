@@ -23,32 +23,34 @@ class GFG
     }
 }
 // } Driver Code Ends
+
 class Solution{
-    
     public int minSwaps(int nums[]){
         HashMap<Integer,Integer> hm = new HashMap<>();
+        
         for(int i = 0;i<nums.length;i++){
             hm.put(nums[i],i);
         }
         
         Arrays.sort(nums);
-        boolean[] vis = new boolean[nums.length];
+        
         int ans = 0;
+        boolean[] vis = new boolean[nums.length];
         for(int i = 0;i<nums.length;i++){
             if(vis[i] == true || hm.get(nums[i]) == i){
                 continue;
             }
+            
             vis[i] = true;
             int csize = 0;
             int j = i;
-            
             do{
                 j = hm.get(nums[j]);
                 vis[j] = true;
                 csize++;
-            }while(i!=j);
+            }while(j != i);
             
-            ans += (csize - 1);
+            ans += (csize-1);
         }
         return ans;
     }
