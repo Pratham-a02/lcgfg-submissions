@@ -77,7 +77,7 @@ class Solution{
                 continue;
             }
             else if(visited[nbr] == true){
-                low[currVert] = Math.min(low[currVert],dis[nbr]);
+                low[currVert] = Math.min(low[currVert],low[nbr]);
             }
             else{
                 count++;
