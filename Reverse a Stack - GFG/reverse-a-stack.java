@@ -39,15 +39,17 @@ class GFG
     }
 }
 // } Driver Code Ends
+
 class Solution{ 
-    static void reverse(Stack<Integer> s){
-        if(s.size() == 0){
+    static void reverse(Stack<Integer> st){
+        if(st.size() == 0){
             return;
         }
         
-        int val = s.pop();
-        reverse(s);
-        insert(s,val);
+        int val = st.peek();
+        st.pop();
+        reverse(st);
+        insert(st,val);
     }
     
     public static void insert(Stack<Integer> st,int val){
@@ -56,8 +58,9 @@ class Solution{
             return;
         }
         
-        int x = st.pop();
+        int ele = st.peek();
+        st.pop();
         insert(st,val);
-        st.push(x);
+        st.push(ele);
     }
 }
