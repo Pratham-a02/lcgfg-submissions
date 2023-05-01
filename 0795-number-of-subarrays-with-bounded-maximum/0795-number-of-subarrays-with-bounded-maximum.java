@@ -1,18 +1,22 @@
-class Solution {
-    public int numSubarrayBoundedMax(int[] nums, int left, int right) {
-        int s = -1;
-        int e = -1;
-        int res = 0;
-        
+class Solution{
+    public int numSubarrayBoundedMax(int[] nums,int left,int right){
+        int si = -1;
+        int ei = -1;
+        int ans = 0;
         for(int i = 0;i<nums.length;i++){
-            if(nums[i]>=left && nums[i]<=right){
-                e = i;
+            int val = nums[i];
+            
+            if(val <= right && val >= left){
+                ei = i;
+                ans +=(ei-si);
             }
-            else if(nums[i]>right){
-                s = e = i;
+            else if(val > right){
+                si = ei = i;
             }
-            res += (e-s);
+            else if(val<left){
+                ans +=(ei-si);
+            }
         }
-        return res;
+        return ans;
     }
 }
