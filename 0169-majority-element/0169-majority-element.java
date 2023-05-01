@@ -3,12 +3,13 @@ class Solution{
         Integer mele = null;
         
         int count = 0;
-        for(int i = 0;i<nums.length;i++){
+        
+        for(int ele:nums){
             if(count == 0){
-                mele = nums[i];
+                mele = ele;
                 count = 1;
             }
-            else if(nums[i] == mele){
+            else if(ele == mele){
                 count++;
             }
             else{
