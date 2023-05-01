@@ -1,17 +1,18 @@
-class Solution {
-    public int maxChunksToSorted(int[] arr) {
-        int[] minfr = new int[arr.length];
-        minfr[arr.length-1] = arr[arr.length-1];
+class Solution{
+    public int maxChunksToSorted(int[] arr){
+        int n = arr.length;
+        int[] minfromright = new int[arr.length];
+        minfromright[n-1] = arr[n-1];
         
-        for(int i = minfr.length-2;i>=0;i--){
-            minfr[i] = Math.min(arr[i],minfr[i+1]);
+        for(int i = n-2;i>=0;i--){
+            minfromright[i] = Math.min(arr[i],minfromright[i+1]);
         }
         
-        int max = Integer.MIN_VALUE;
         int count = 0;
+        int max = Integer.MIN_VALUE;
         for(int i = 0;i<arr.length-1;i++){
             max = Math.max(max,arr[i]);
-            if(max<=minfr[i+1]){
+            if(max <= minfromright[i+1]){
                 count++;
             }
         }
