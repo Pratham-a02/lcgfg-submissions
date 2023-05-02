@@ -10,9 +10,9 @@ class Solution {
     public int solve(int idx,String colors,int[] need,char prev,int[][] dp){
         if(idx == 0){
             if(prev == colors.charAt(idx)){
-                return need[idx];
+                return dp[idx][prev-'a'] = need[idx];
             }
-            return 0;
+            return dp[idx][prev-'a'] = 0;
         }
         
         if(dp[idx][prev-'a'] != -1){
