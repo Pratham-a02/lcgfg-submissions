@@ -1,21 +1,42 @@
-class Solution {
-    public String reverseVowels(String s) {
+class Solution{
+    public String reverseVowels(String s){
         StringBuilder sb = new StringBuilder(s);
-        List<Character> al = new ArrayList<>();
-        for(int i = 0;i<s.length();i++){
-            if(s.charAt(i) == 'a'|| s.charAt(i) == 'e' || s.charAt(i) == 'i' || s.charAt(i) == 'o' || s.charAt(i) == 'u' || s.charAt(i) == 'A'|| s.charAt(i) == 'E' || s.charAt(i) == 'I' || s.charAt(i) == 'O' || s.charAt(i) == 'U'){
-                al.add(s.charAt(i));
+        HashSet<Character> hs = new HashSet<>();
+        hs.add('a');
+        hs.add('e');
+        hs.add('i');
+        hs.add('o');
+        hs.add('u');
+        hs.add('A');
+        hs.add('E');
+        hs.add('I');
+        hs.add('O');
+        hs.add('U');
+        int i = 0;
+        int j = s.length()-1;
+        
+        while(i<=j){
+            char ch1 = sb.charAt(i);
+            char ch2 = sb.charAt(j);
+            
+            if(hs.contains(ch1) && hs.contains(ch2)){
+                sb.setCharAt(i,ch2);
+                sb.setCharAt(j,ch1);
+                i++;
+                j--;
+            }
+            else if(hs.contains(ch1) && !hs.contains(ch2)){
+                j--;
+            }
+            else if(!hs.contains(ch1) && hs.contains(ch2)){
+                i++;
+            }
+            else if(!hs.contains(ch1) && !hs.contains(ch2)){
+                i++;
+                j--;
             }
         }
         
-        int idx = al.size()-1;
-        for(int i = 0;i<sb.length();i++){
-            if(sb.charAt(i) == 'a'|| sb.charAt(i) == 'e' || sb.charAt(i) == 'i' || sb.charAt(i) == 'o' || sb.charAt(i) == 'u' || sb.charAt(i) == 'A'|| sb.charAt(i) == 'E' || sb.charAt(i) == 'I' || sb.charAt(i) == 'O' || sb.charAt(i) == 'U'){
-                sb.setCharAt(i,al.get(idx));
-                idx--;
-            }
-                
-        }
         return sb.toString();
     }
 }
