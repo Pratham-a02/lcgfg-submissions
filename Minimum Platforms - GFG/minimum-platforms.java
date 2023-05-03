@@ -38,33 +38,28 @@ class GFG
 
 // } Driver Code Ends
 
-
-
-
 class Solution{
-    
-    public static int findPlatform(int arr[], int dep[], int n){
+    static int findPlatform(int arr[],int dep[],int n){
+        int count = 0;
         Arrays.sort(arr);
         Arrays.sort(dep);
-        
         int i = 0;
         int j = 0;
-        int max = 0;
-        int count = 0;
-        while(i<arr.length && j<dep.length){
+        int max = Integer.MIN_VALUE;
+        
+        while(i<n && j<n){
             if(arr[i] <= dep[j]){
-                i++;
                 count++;
-                
+                i++;
             }
-            else{
-                j++;
+            else if(dep[j] < arr[i]){
                 count--;
+                j++;
             }
+            
             max = Math.max(max,count);
         }
         return max;
     }
-    
 }
 
