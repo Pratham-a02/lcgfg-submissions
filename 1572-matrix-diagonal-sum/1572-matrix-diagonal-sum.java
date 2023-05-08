@@ -2,15 +2,11 @@ class Solution{
     public int diagonalSum(int[][] mat){
         int n = mat.length;
         int ans = 0;
-        boolean[][] vis = new boolean[n][n];
         
         int i = 0;
         int j = 0;
         while(i<n && j<n){
-            if(vis[i][j] == false){
-                ans += mat[i][j];
-                vis[i][j] = true;
-            }
+            ans += mat[i][j];
             i++;
             j++;
         }
@@ -18,14 +14,11 @@ class Solution{
         i = 0;
         j = n-1;
         while(i<n && j>=0){
-            if(vis[i][j] == false){
-                ans += mat[i][j];
-                vis[i][j] = true;
-            }
+            ans += mat[i][j];
             i++;
             j--;
         }
         
-        return ans;
+        return (n%2 == 0)?ans:ans-mat[n/2][n/2];
     }
 }
