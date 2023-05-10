@@ -48,10 +48,12 @@ class ModifyQueue {
 }
 
 // } Driver Code Ends
+
 class GfG{
-    public Queue<Integer> modifyQueue(Queue<Integer> q, int k){
-        reverse(q,k,0);
-        int nk = q.size() - k;
+    public Queue<Integer> modifyQueue(Queue<Integer> q,int k){
+        reverse(q,k);
+        int nk = q.size()-k;
+        
         for(int i = 0;i<nk;i++){
             int val = q.remove();
             q.add(val);
@@ -59,14 +61,13 @@ class GfG{
         return q;
     }
     
-    public Queue<Integer> reverse(Queue<Integer> q, int k,int i){
-        if(i == k || q.size() == 0){
-            return q;
+    public void reverse(Queue<Integer> q,int k){
+        if(k == 0 || q.size() == 0){
+            return;
         }
         
         int val = q.remove();
-        reverse(q,k,i+1);
+        reverse(q,k-1);
         q.add(val);
-        return q;
     }
 }
