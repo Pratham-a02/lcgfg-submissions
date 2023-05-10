@@ -32,13 +32,12 @@ class GFG {
 // } Driver Code Ends
 
 
-//User function Template for Java
-
 class Solution{
     
     public static long pairWithMaxSum(long arr[], long N){
         long max = 0;
-        for(int i = 0;i<arr.length-1;i++){
+        
+        for(int i = 0;i<N-1;i++){
             max = Math.max(max,arr[i]+arr[i+1]);
         }
         return max;
