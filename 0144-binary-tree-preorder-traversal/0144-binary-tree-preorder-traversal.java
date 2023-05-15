@@ -13,39 +13,31 @@
  *     }
  * }
  */
-class Pair{
-    TreeNode root;
-    int state;
-    
-    Pair(TreeNode root,int state){
-        this.root = root;
-        this.state = state;
-    }
-}
-class Solution {
-    public List<Integer> preorderTraversal(TreeNode root) {
-        if(root == null){
-            return new ArrayList<>();
-        }
-        Stack<Pair> st = new Stack<>();
+class Solution{
+    public List<Integer> preorderTraversal(TreeNode root){
+        TreeNode curr = root;
         List<Integer> ans = new ArrayList<>();
-        st.push(new Pair(root,1));
-        while(st.size()>0){
-            if(st.peek().state == 1){
-                ans.add(st.peek().root.val);
-                st.peek().state++;
-                if(st.peek().root.left != null){
-                    st.push(new Pair(st.peek().root.left,1));
-                }
-            }
-            else if(st.peek().state == 2){
-                st.peek().state++;
-                if(st.peek().root.right != null){
-                    st.push(new Pair(st.peek().root.right,1));
-                }
+        while(curr != null){
+            if(curr.left == null){
+                ans.add(curr.val);
+                curr = curr.right;
             }
             else{
-                st.pop();
+                TreeNode iop = curr.left;
+                
+                while(iop.right != null && iop.right != curr){
+                    iop = iop.right;
+                }
+                
+                if(iop.right == null){
+                    ans.add(curr.val);
+                    iop.right = curr;
+                    curr = curr.left;
+                }
+                else{
+                    iop.right = null;
+                    curr = curr.right;
+                }
             }
         }
         return ans;
