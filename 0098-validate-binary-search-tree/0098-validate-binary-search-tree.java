@@ -13,23 +13,27 @@
  *     }
  * }
  */
-class Solution {
-    public boolean isValidBST(TreeNode root){
-        if(root.left == null && root.right == null){
-            return true;
-        }
-        return solve(root,Long.MIN_VALUE,Long.MAX_VALUE);
-    }
-    
-    public boolean solve(TreeNode root,long leftlimit,long rightlimit){
+class Solution{
+    long prev = Long.MIN_VALUE;
+    public boolean isValidBST(TreeNode root) {
         if(root == null){
             return true;
         }
         
-        if(root.val <= leftlimit || root.val >= rightlimit){
+        boolean la = isValidBST(root.left);
+        if(la == false){
             return false;
         }
         
-        return solve(root.left,leftlimit,root.val) && solve(root.right,root.val,rightlimit);
+        if(prev >= root.val){
+            return false;
+        }
+        prev = root.val;
+        
+        boolean ra = isValidBST(root.right);
+        if(ra == false){
+            return false;
+        }
+        return true;
     }
 }
