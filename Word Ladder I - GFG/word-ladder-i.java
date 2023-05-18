@@ -28,20 +28,20 @@ class GFG
 // } Driver Code Ends
 
 class Solution{
-    public int wordLadderLength(String beginWord,String targetWord,String[] wordList){
+    public int wordLadderLength(String startWord,String targetWord,String[] wordList){
         if(Arrays.asList(wordList).contains(targetWord) == false){
             return 0;
         }
         
-        ArrayDeque<String> qu = new ArrayDeque<>();
         HashMap<String,Boolean> hm = new HashMap<>();
-        for(int i = 0;i<wordList.length;i++){
-            hm.put(wordList[i],false);
+        ArrayDeque<String> qu = new ArrayDeque<>();
+        for(String word:wordList){
+            hm.put(word,false);
         }
         
-        qu.add(beginWord);
-        hm.put(beginWord,true);
         int length = 1;
+        hm.put(startWord,true);
+        qu.add(startWord);
         
         while(qu.size()>0){
             int csize = qu.size();
@@ -60,8 +60,9 @@ class Solution{
         return 0;
     }
     
-    public void addWord(String currWord,HashMap<String,Boolean>hm,ArrayDeque<String> qu){
+    public void addWord(String currWord,HashMap<String,Boolean> hm,ArrayDeque<String> qu){
         for(int i = 0;i<currWord.length();i++){
+            
             char[] arr = currWord.toCharArray();
             
             for(int j = 0;j<26;j++){
@@ -77,5 +78,6 @@ class Solution{
                 }
             }
         }
+        return;
     }
 }
