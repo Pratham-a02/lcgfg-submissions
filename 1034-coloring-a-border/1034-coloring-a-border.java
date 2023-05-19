@@ -1,12 +1,10 @@
-class Solution {
-    public int[][] colorBorder(int[][] grid, int row, int col, int color) {
-        int m = grid.length;
-        int n = grid[0].length;
+class Solution{
+    public int[][] colorBorder(int[][] grid,int row,int col,int color){
         int orgc = grid[row][col];
-        traverse(row,col,color,grid,orgc,m,n);
+        dfs(row,col,orgc,grid);
         
-        for(int i = 0;i<m;i++){
-            for(int j = 0;j<n;j++){
+        for(int i = 0;i<grid.length;i++){
+            for(int j = 0;j<grid[0].length;j++){
                 if(grid[i][j] == -orgc){
                     grid[i][j] = color;
                 }
@@ -15,23 +13,23 @@ class Solution {
         return grid;
     }
     
-    public void traverse(int currRow,int currCol,int color,int[][] grid,int orgc,int m,int n){
-        if(currRow<0 || currCol<0 || currRow>=m || currCol>=n || grid[currRow][currCol]!= orgc){
+    public void dfs(int row,int col,int orgc,int[][] grid){
+        if(row<0 || col<0 || row>=grid.length || col>=grid[0].length || grid[row][col] != orgc){
             return;
         }
+        grid[row][col] = -orgc;
         
-        grid[currRow][currCol] = -orgc;
-        traverse(currRow-1,currCol,color,grid,orgc,m,n);
-        traverse(currRow,currCol-1,color,grid,orgc,m,n);
-        traverse(currRow+1,currCol,color,grid,orgc,m,n);
-        traverse(currRow,currCol+1,color,grid,orgc,m,n);
+        dfs(row-1,col,orgc,grid);
+        dfs(row,col+1,orgc,grid);
+        dfs(row+1,col,orgc,grid);
+        dfs(row,col-1,orgc,grid);
         
-        if(currRow>0 && currRow<m-1 && currCol>0 && currCol<n-1 && 
-           Math.abs(grid[currRow-1][currCol]) == orgc &&
-           Math.abs(grid[currRow][currCol-1]) == orgc &&
-           Math.abs(grid[currRow+1][currCol]) == orgc &&
-           Math.abs(grid[currRow][currCol+1]) == orgc){
-            grid[currRow][currCol] = orgc;
+        if(row > 0 && col > 0 && row<grid.length-1 && col < grid[0].length-1 && 
+            Math.abs(grid[row-1][col]) == orgc &&
+            Math.abs(grid[row][col+1]) == orgc &&
+            Math.abs(grid[row+1][col]) == orgc &&
+            Math.abs(grid[row][col-1]) == orgc){
+            grid[row][col] = orgc;
         }
         
         return;
