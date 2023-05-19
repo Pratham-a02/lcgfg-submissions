@@ -34,7 +34,7 @@ class Solution{
             int count = 0;
             
             for(int j = 0;j<N;j++){
-                if(graph[i][j] == 1 && i!=j){
+                if(graph[i][j] == 1){
                     count++;
                 }
             }
