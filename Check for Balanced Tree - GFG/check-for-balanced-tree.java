@@ -110,42 +110,47 @@ class GfG {
 
 // } Driver Code Ends
 /*
-class Node
-{
+class Node{
 	int data;
 	Node left,right;
-	
-	Node(int d)
-	{
+	Node(int d){
 		data = d;
 		left = right = null;		
-	}
-} */
+	}} */
+
 class Tree{
     boolean isBalanced(Node root){
 	    if(root == null){
 	        return true;
 	    }
-	    int lh = height(root.left);
-	    int rh = height(root.right);
 	    
-	    if(Math.abs(lh-rh)>1){
+	    int ans = dfs(root);
+	    if(ans == -1){
 	        return false;
 	    }
 	    else{
-	        return isBalanced(root.left) && isBalanced(root.right);
+	        return true;
 	    }
     }
     
-    public int height(Node root){
+    public int dfs(Node root){
         if(root == null){
             return 0;
         }
         
-        int left = 1 + height(root.left);
-        int right = 1 + height(root.right);
+        int lh = dfs(root.left);
+        if(lh == -1){
+            return -1;
+        }
+        int rh = dfs(root.right);
+        if(rh == -1){
+            return -1;
+        }
+        if(Math.abs(lh-rh)>1){
+            return -1;
+        }
         
-        return Math.max(left,right);
+        return 1 + Math.max(lh,rh);
     }
 }
 
