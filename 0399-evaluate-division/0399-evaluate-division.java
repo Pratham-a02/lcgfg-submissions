@@ -1,11 +1,11 @@
 class Solution{
     HashMap<String,String> parent;
-    HashMap<String,Double> multiplier;
+    HashMap<String,Double> multi;
     
     public void addToDSU(String x){
         if(!parent.containsKey(x)){
             parent.put(x,x);
-            multiplier.put(x,1.0);
+            multi.put(x,1.0);
         }
     }
     
@@ -18,7 +18,7 @@ class Solution{
             String fp = find(cp);
             
             parent.put(x,fp);
-            multiplier.put(x,multiplier.get(x)*multiplier.get(cp));
+            multi.put(x,multi.get(x)*multi.get(cp));
             
             return fp;
         }
@@ -26,7 +26,7 @@ class Solution{
     
     public double[] calcEquation(List<List<String>> equations,double[] values,List<List<String>>queries){
         parent = new HashMap<>();
-        multiplier = new HashMap<>();
+        multi = new HashMap<>();
         
         for(List<String> eqn : equations){
             addToDSU(eqn.get(0));
@@ -40,11 +40,11 @@ class Solution{
             if(l0.equals(l1) == false){
                 //union
                 
-                double m1 = multiplier.get(eqn.get(0));
-                double m2 = multiplier.get(eqn.get(1));
+                double m1 = multi.get(eqn.get(0));
+                double m2 = multi.get(eqn.get(1));
                 
                 parent.put(l0,l1);
-                multiplier.put(l0,(m2*values[idx++]/m1));
+                multi.put(l0,(m2*values[idx++]/m1));
             }
         }
         
@@ -69,8 +69,8 @@ class Solution{
                 continue;
             }
             
-            double m0 = multiplier.get(q0);
-            double m1 = multiplier.get(q1);
+            double m0 = multi.get(q0);
+            double m1 = multi.get(q1);
             res[idx] = m0/m1;
             idx++;
         }
