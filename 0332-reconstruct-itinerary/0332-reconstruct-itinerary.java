@@ -1,8 +1,9 @@
 class Solution {
-    HashMap<String,PriorityQueue<String>> hm;
-    public List<String> findItinerary(List<List<String>> tickets){
+    HashMap<String,PriorityQueue<String>>hm;
+    public List<String> findItinerary(List<List<String>> tickets) {
         hm = new HashMap<>();
-        for(List<String> ticket:tickets){
+        
+        for(List<String> ticket : tickets){
             String src = ticket.get(0);
             String dest = ticket.get(1);
             
@@ -20,17 +21,17 @@ class Solution {
         return ans;
     }
     
-    public void dfs(String v,List<String> ans){
-        if(!hm.containsKey(v)){
-            ans.add(0,v);
+    public void dfs(String src,List<String> ans){
+        if(!hm.containsKey(src) || hm.get(src).size() == 0){
+            ans.add(0,src);
             return;
         }
         
-        while(hm.get(v).size()>0){
-            String nbr = hm.get(v).remove();
+        while(hm.get(src).size()>0){
+            String nbr = hm.get(src).remove();
+            
             dfs(nbr,ans);
         }
-        ans.add(0,v);
-        return;
+        ans.add(0,src);
     }
 }
