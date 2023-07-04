@@ -71,12 +71,7 @@ class GFG{
     } 
 } 
 // } Driver Code Ends
-
-
-//User function Template for Java
-
-/* 
-class Node{
+/* class Node{
     int data;
     Node next;
     
@@ -89,26 +84,25 @@ class Node{
 
 class Solution{
     Node divide(int N, Node head){
-        Node pe = new Node(-1);
-        Node po = new Node(-1);
-        Node odd = po;
-        Node even = pe;
+        Node e = new Node(-1);
+        Node o = new Node(-1);
+        Node pe = e;
+        Node po = o;
         Node curr = head;
+        
         while(curr != null){
-            if(curr.data % 2 == 0){
-                pe.next = curr;
-                pe = curr;
-                curr = curr.next;
-            }
-            else{
+            if(curr.data %2 != 0){
                 po.next = curr;
                 po = curr;
-                curr = curr.next;
             }
+            else{
+                pe.next = curr;
+                pe = curr;
+            }
+            curr = curr.next;
         }
-        
-        pe.next = odd.next;
         po.next = null;
-        return even.next;
+        pe.next = o.next;
+        return e.next;
     }
 }
