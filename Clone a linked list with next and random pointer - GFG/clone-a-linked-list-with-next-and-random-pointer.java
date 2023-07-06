@@ -149,39 +149,37 @@ class Cloning {
     }
 }
 // } Driver Code Ends
-/*
-class Node{
+/*class Node{
     int data;
     Node next, arb;
-
     Node(int d){ 
         data = d;
         next = arb = null; 
-        
     }
 }*/
 
 class Clone{
     Node copyList(Node head){
         HashMap<Node,Node> hm = new HashMap<>();
+        
         Node dummy = new Node(-1);
-        Node temp = dummy;
+        Node ptr = dummy;
+        
         Node curr = head;
         while(curr != null){
             Node nNode = new Node(curr.data);
-            temp.next = nNode;
-            temp = nNode;
-            hm.put(curr,temp);
+            ptr.next = nNode;
+            ptr = ptr.next;
+            hm.put(curr,ptr);
             curr = curr.next;
         }
         
         curr = head;
-        // temp = dummy.next;
-        while(curr!= null){
-            Node random = curr.arb;
+        
+        while(curr != null){
             Node saamne = hm.get(curr);
-            Node toPoint = hm.get(random);
-            saamne.arb = toPoint;
+            Node rand = curr.arb;
+            saamne.arb = hm.get(rand);
             curr = curr.next;
         }
         
