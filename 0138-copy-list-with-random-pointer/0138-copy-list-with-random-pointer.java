@@ -1,4 +1,5 @@
 /*
+// Definition for a Node.
 class Node {
     int val;
     Node next;
@@ -11,36 +12,35 @@ class Node {
     }
 }
 */
-class Solution{
-    public Node copyRandomList(Node head){
-        Node curr = head;
-        while(curr != null){
-            Node forw = curr.next;
-            Node nNode = new Node(curr.val);
-            curr.next = nNode;
-            nNode.next = forw;
-            curr = forw;
-        }
-        
-        curr = head;
-        while(curr != null){
-            Node rand = curr.random;
-            if(rand != null){
-                curr.next.random = rand.next;
-            }
-            curr = curr.next.next;
-        }
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        HashMap<Node,Node> hm = new HashMap<>();
         
         Node dummy = new Node(-1);
-        Node prev = dummy;
-        curr = head;
+        Node ptr = dummy;
+        Node curr = head;
+        
         while(curr != null){
-            prev.next = curr.next;
-            curr.next = curr.next.next;
-            prev = prev.next;
+            Node nNode = new Node(curr.val);
+            hm.put(curr,nNode);
+            ptr.next = nNode;
+            ptr = ptr.next;
             curr = curr.next;
         }
-        // prev.next = curr;
+        
+        curr = head;
+        
+        while(curr != null){
+            Node saamne = hm.get(curr);
+            Node rand = curr.random;
+            
+            Node put = hm.get(rand);
+            
+            saamne.random = put;
+            curr = curr.next;
+        }
+        
         return dummy.next;
     }
 }
