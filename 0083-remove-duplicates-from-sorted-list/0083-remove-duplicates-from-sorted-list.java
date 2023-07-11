@@ -8,24 +8,24 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
+class Solution{
+    public ListNode deleteDuplicates(ListNode head){
         if(head == null || head.next == null){
             return head;
         }
-        ListNode pre = head;
-	    ListNode curr = head;
-	    
-	    while(curr != null){
-	        if(pre.val == curr.val){
-	            curr = curr.next;
-	        }
-	        else{
-	            pre.next = curr;
-	            pre = curr;
-	        }
-	    }
-	    pre.next = curr;
-	    return head;
+        ListNode prev = head;
+        ListNode curr = head;
+        
+        while(curr != null){
+            if(prev.val == curr.val){
+                curr = curr.next;
+            }
+            else{
+                prev.next = curr;
+                prev = curr;
+            }
+        }
+        prev.next = curr;
+        return head;
     }
 }
