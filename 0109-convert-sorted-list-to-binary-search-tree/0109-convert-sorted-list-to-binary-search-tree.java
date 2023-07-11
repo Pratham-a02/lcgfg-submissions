@@ -23,7 +23,7 @@
  *     }
  * }
  */
-class Solution {
+class Solution{
     public TreeNode sortedListToBST(ListNode head) {
         if(head == null){
             return null;
@@ -43,8 +43,10 @@ class Solution {
         ListNode mid = slow.next;
         slow.next = null;
         TreeNode root = new TreeNode(mid.val);
+        
         root.left = sortedListToBST(head);
         root.right = sortedListToBST(mid.next);
+        
         return root;
     }
 }
