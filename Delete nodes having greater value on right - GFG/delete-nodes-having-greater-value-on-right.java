@@ -66,20 +66,19 @@ public class LinkedList
     }
 }
 // } Driver Code Ends
-/*
-class Node {
+/*class Node{
    int data;
    Node next;
-
-  Node(int data) {
+  Node(int data){
       this.data = data;
-  }
-}
-*/
+  }}*/
+
 class Solution{
-    Node reverseList(Node head){
+    
+    public Node reverse(Node head){
         Node pre = null;
         Node curr = head;
+        
         while(curr != null){
             Node temp = curr.next;
             curr.next = pre;
@@ -88,23 +87,30 @@ class Solution{
         }
         return pre;
     }
+    
     Node compute(Node head){
-        head = reverseList(head);
-        Node curr = head.next;
-        Node prev = head;
-        int max = head.data;
+        if(head == null || head.next == null){
+            return head;
+        }
+        Node nHead = reverse(head);
+        Node pre = nHead;
+        Node curr = pre.next;
+        int max = nHead.data;
+        
         while(curr != null){
-            if(curr.data>=max){
+            if(curr.data >= max){
                 max = curr.data;
-                prev = curr;
+                pre = curr;
                 curr = curr.next;
             }
             else{
-                prev.next = curr.next;
-                curr = prev.next;
+                pre.next = curr.next;
+                curr = pre.next;
             }
         }
-        return reverseList(head);
+        
+        Node n_ = reverse(nHead);
+        return n_;
     }
 }
   
