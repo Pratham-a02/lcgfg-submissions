@@ -25,28 +25,21 @@ class GFG
 // } Driver Code Ends
 
 class Sol{
-    public int isPossible (String s){
+    public int isPossible(String S){
         int[] farr = new int[26];
-        int count = 0;
-        for(int i = 0;i<s.length();i++){
-            char ch = s.charAt(i);
-            
+        
+        for(char ch : S.toCharArray()){
             farr[ch-'a']++;
         }
         
+        int count = 0;
+        
         for(int i = 0;i<farr.length;i++){
-            if(farr[i] != 0){
-                if(farr[i] %2 != 0){
-                    count++;
-                }
+            if(farr[i]%2 != 0){
+                count++;
             }
         }
         
-        if(count > 1){
-            return 0;
-        }
-        else{
-            return 1;
-        }
+        return count>1?0:1;
     }
 }
