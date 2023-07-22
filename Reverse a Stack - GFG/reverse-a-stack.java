@@ -41,26 +41,24 @@ class GFG
 // } Driver Code Ends
 
 class Solution{ 
-    static void reverse(Stack<Integer> st){
-        if(st.size() == 0){
+    static void reverse(Stack<Integer> s){
+        if(s.size() == 0){
             return;
         }
         
-        int val = st.peek();
-        st.pop();
-        reverse(st);
-        insert(st,val);
+        int val = s.pop();
+        reverse(s);
+        insert(val,s);
     }
     
-    public static void insert(Stack<Integer> st,int val){
-        if(st.size() == 0){
-            st.push(val);
+    static void insert(int val,Stack<Integer> s){
+        if(s.size() == 0){
+            s.push(val);
             return;
         }
         
-        int ele = st.peek();
-        st.pop();
-        insert(st,val);
-        st.push(ele);
+        int curr = s.pop();
+        insert(val,s);
+        s.push(curr);
     }
 }
