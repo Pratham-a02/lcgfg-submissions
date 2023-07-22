@@ -32,16 +32,16 @@ class GfG
 // } Driver Code Ends
 
 class Solution{
-    public long findMinDiff (ArrayList<Integer> a, int n, int m){
+    public long findMinDiff (ArrayList<Integer> a,int n,int m){
         Collections.sort(a);
+        long min = Long.MAX_VALUE;
         int left = 0;
-        int max = Integer.MAX_VALUE;
         for(int right = 0;right<n;right++){
-            while(right - left + 1 == m){
-                max = Math.min(max,a.get(right) - a.get(left));
+            if(right - left + 1 == m){
+                min = Math.min(min,a.get(right)-a.get(left));
                 left++;
             }
         }
-        return max;
+        return min;
     }
 }
