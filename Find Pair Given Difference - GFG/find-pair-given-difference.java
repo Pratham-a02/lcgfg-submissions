@@ -41,18 +41,18 @@ class Solution{
         int i = 0;
         int j = 1;
         
-        while(i<size && j<size){
-            if(arr[j] - arr[i] == n){
-                return true;
-            }
-            else if(arr[j] - arr[i] < n){
+        while(j<size){
+            if(arr[j] - arr[i] < n){
                 j++;
             }
             else if(arr[j] - arr[i] > n){
                 i++;
-                if(i == j){
+                if(i==j){
                     j++;
                 }
+            }
+            else if(arr[j] -arr[i] == n){
+                return true;
             }
         }
         return false;
