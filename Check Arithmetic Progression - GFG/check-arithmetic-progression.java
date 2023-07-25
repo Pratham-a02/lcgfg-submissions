@@ -10,24 +10,34 @@ import java.util.*;
 
 
 // } Driver Code Ends
-//User function Template for Java
-
-
 
 class Solution{
-    boolean checkIsAP(int arr[],int n){
+    boolean checkIsAP(int arr[] ,int n){
         HashSet<Integer> hs = new HashSet<>();
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-        for(int num : arr){
-            min = Math.min(min,num);
-            max = Math.max(max,num);
-            hs.add(num);
+        
+        for(int val : arr){
+            hs.add(val);
+            min = Math.min(min,val);
+            max = Math.max(max,val);
         }
+        
         int d = (max-min)/(n-1);
+        
+        if(d == 0){
+            if(hs.size() == 1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        
         for(int i = 0;i<n;i++){
-            int num = min + i*d;
-            if(!hs.contains(num)){
+            int val = min + (i*d);
+            
+            if(!hs.contains(val)){
                 return false;
             }
         }
