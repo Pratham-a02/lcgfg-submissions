@@ -1,20 +1,21 @@
-class Solution {
-    public List<Integer> findAnagrams(String s, String p) {
+class Solution{
+    public List<Integer> findAnagrams(String s,String p){
         List<Integer> ans = new ArrayList<>();
-        int[] farr = new int[26];
         int k = p.length();
+        int[] farr = new int[26];
         for(int i = 0;i<p.length();i++){
-            farr[p.charAt(i) - 'a']++;
+            char ch = p.charAt(i);
+            farr[ch-'a']++;
         }
         
         int left = 0;
         
         for(int right = 0;right<s.length();right++){
             char ch = s.charAt(right);
+            farr[ch-'a']--;
             
-            farr[ch - 'a']--;
-            while(right - left + 1 > k){
-                farr[s.charAt(left)-'a']++;
+            while(right-left+1>k){
+                farr[s.charAt(left) - 'a']++;
                 left++;
             }
             
