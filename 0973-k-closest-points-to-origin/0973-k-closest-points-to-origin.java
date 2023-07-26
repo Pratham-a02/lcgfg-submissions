@@ -13,28 +13,24 @@ class Pair implements Comparable<Pair>{
         return o.dist - this.dist;
     }
 }
-class Solution {
+class Solution{
     public int[][] kClosest(int[][] points, int k) {
         PriorityQueue<Pair> pq = new PriorityQueue<>();
+        
         for(int[] point:points){
-            int px = point[0];
-            int py = point[1];
-            
-            int r = (px*px) + (py*py);
-            Pair p = new Pair(px,py,r);
+            Pair p = new Pair(point[0],point[1],point[0]*point[0]+point[1]*point[1]);
             pq.add(p);
-            if(pq.size()>k){
+            while(pq.size()>k){
                 pq.remove();
             }
         }
-        int idx = 0;
+        
         int[][] ans = new int[pq.size()][2];
+        int idx = 0;
         while(pq.size()>0){
             Pair p = pq.remove();
-            int vx = p.x;
-            int vy = p.y;
-            ans[idx][0] = vx;
-            ans[idx][1] = vy;
+            ans[idx][0] = p.x;
+            ans[idx][1] = p.y;
             idx++;
         }
         return ans;
