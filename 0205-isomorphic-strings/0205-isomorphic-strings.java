@@ -1,48 +1,31 @@
-class Solution {
-    //public boolean isIsomorphic(String s, String t) {
-    //     if(s.length() != t.length()){
-    //         return false;
-    //     }
-    //     int n = s.length();
-    //     HashMap<Character,Character> hm = new HashMap<>();
-    //     for(int i = 0;i<n;i++){
-    //     char ch = s.charAt(i);
-    //     char sch = t.charAt(i);
-    //     if(hm.containsKey(ch) && sch != hm.get(ch)){
-    //        return false;
-    //        // break;
-    //     }
-    //     else{
-    //         hm.put(ch,sch);
-    //     }
-    //     }
-    //     return true;
-    // }
-    public boolean isIsomorphic(String s, String t){
-        if(s.length() != t.length()){
-            return false;
-         }
+class Solution{
+    public boolean isIsomorphic(String s,String t){
         HashMap<Character,Character> hm1 = new HashMap<>();
         HashMap<Character,Character> hm2 = new HashMap<>();
+        
+        if(s.length() != t.length()){
+            return false;
+        }
         int n = s.length();
         for(int i = 0;i<n;i++){
-            char ch = s.charAt(i);
-            char sch = t.charAt(i);
-            if(hm1.containsKey(ch)){
-                if(hm1.get(ch) != sch){
+            char ch1 = s.charAt(i);
+            char ch2 = t.charAt(i);
+            
+            if(hm1.containsKey(ch1)){
+                if(hm1.get(ch1) != ch2){
                     return false;
                 }
             }
-            if(hm2.containsKey(sch)){
-                if(hm2.get(sch) != ch){
+            else if(hm2.containsKey(ch2)){
+                if(hm2.get(ch2) != ch1){
                     return false;
                 }
             }
             else{
-                hm1.put(ch,sch);
-                hm2.put(sch,ch);
-            }   
-         }
+                hm1.put(ch1,ch2);
+                hm2.put(ch2,ch1);
+            }
+        }
         return true;
-     }
-  }
+    }
+}
