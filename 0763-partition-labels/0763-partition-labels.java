@@ -16,7 +16,7 @@ class Solution{
             
             if(i == end){
                 ans.add(end-st+1);
-                end = st = i+1;
+                st = i+1;
             }
         }
         
