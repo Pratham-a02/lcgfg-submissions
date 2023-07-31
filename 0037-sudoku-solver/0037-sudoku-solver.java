@@ -1,5 +1,5 @@
-class Solution {
-    public void solveSudoku(char[][] board) {
+class Solution{
+    public void solveSudoku(char[][] board){
         helper(0,0,board);
     }
     
@@ -24,10 +24,10 @@ class Solution {
             return helper(nextRow,nextCol,board);
         }
         else{
-            for(int i = 1;i<10;i++){
-                if(isValid(board,currRow,currCol,i)){
+            for(int i = 1;i<=9;i++){
+                if(isValid(currRow,currCol,board,i)){
                     board[currRow][currCol] = (char)(i+'0');
-
+                    
                     if(helper(nextRow,nextCol,board)){
                         return true;
                     }
@@ -40,9 +40,9 @@ class Solution {
         return false;
     }
     
-    public boolean isValid(char[][] board, int row, int col, int number) {
-       //column
-       for(int i=0; i<board.length; i++) {
+    public boolean isValid(int row,int col,char[][] board,int number){
+        
+        for(int i=0; i<board.length; i++) {
            if(board[i][col] == (char)(number+'0')) {
                return false;
            }
