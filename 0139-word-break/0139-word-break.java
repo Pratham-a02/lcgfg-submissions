@@ -1,10 +1,9 @@
-class Solution {
+class Solution{
     public boolean wordBreak(String s, List<String> wordDict) {
-        HashMap<String,Boolean> hm = new HashMap<>();
-        return wordbreak(s,wordDict,hm);
+        return solve(s,wordDict,new HashMap<>());
     }
     
-    public boolean wordbreak(String s,List<String> dict,HashMap<String,Boolean> hm){
+    public boolean solve(String s,List<String> wordDict,HashMap<String,Boolean> hm){
         if(s.length() == 0){
             return true;
         }
@@ -14,10 +13,10 @@ class Solution {
         }
         
         for(int i = 0;i<s.length();i++){
-            String str = s.substring(0,i+1);
-            if(dict.contains(str)){
+            String substr = s.substring(0,i+1);
+            if(wordDict.contains(substr)){
                 String next = s.substring(i+1);
-                boolean res = wordbreak(next,dict,hm);
+                boolean res = solve(next,wordDict,hm);
                 hm.put(next,res);
                 if(res){
                     return true;
