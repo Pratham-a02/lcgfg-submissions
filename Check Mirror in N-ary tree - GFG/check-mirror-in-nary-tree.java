@@ -34,11 +34,8 @@ class GFG {
 }
 // } Driver Code Ends
 
-
-//User function Template for Java
-
-class Solution {
-    static int checkMirrorTree(int n, int e, int[] A, int[] B) {
+class Solution{
+    static int checkMirrorTree(int n,int e,int[] A,int[] B){
         if(A.length != B.length){
             return 0;
         }
@@ -46,9 +43,9 @@ class Solution {
         for(int i = 0;i<A.length;i+=2){
             int a = A[i];
             int b = A[i+1];
-            
             if(hm.containsKey(a)){
-                hm.get(a).push(b);
+                Stack<Integer> st = hm.get(a);
+                st.push(b);
             }
             else{
                 Stack<Integer> st = new Stack<>();
@@ -57,14 +54,22 @@ class Solution {
             }
         }
         
+        
         for(int i = 0;i<B.length;i+=2){
             int a = B[i];
             int b = B[i+1];
             
-            Stack<Integer> st = hm.get(a);
-            int val = st.pop();
-            if(val != b){
+            if(!hm.containsKey(a)){
                 return 0;
+            }
+            else{
+                Stack<Integer> st = hm.get(a);
+                if(st.peek() != b){
+                    return 0;
+                }
+                else{
+                    st.pop();
+                }
             }
         }
         return 1;
