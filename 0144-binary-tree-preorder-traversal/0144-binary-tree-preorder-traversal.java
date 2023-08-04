@@ -13,10 +13,11 @@
  *     }
  * }
  */
-class Solution{
-    public List<Integer> preorderTraversal(TreeNode root){
-        TreeNode curr = root;
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
+        TreeNode curr = root;
+        
         while(curr != null){
             if(curr.left == null){
                 ans.add(curr.val);
