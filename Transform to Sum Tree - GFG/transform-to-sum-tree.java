@@ -107,8 +107,8 @@ class GfG {
 
 
 // } Driver Code Ends
-/*
-class Node{
+
+/*class Node{
     int data;
     Node left,right;
     Node(int d){
@@ -117,22 +117,21 @@ class Node{
     	right=null;
     }
 }*/
+
 class Solution{
     public void toSumTree(Node root){
-         dfs(root);
+        solve(root);
     }
     
-    public int dfs(Node root){
-        if(root == null){
-            return 0;
-        }
+    public int solve(Node root){
+        if(root == null)
+            return 0;;
+            
+        int left = solve(root.left);
+        int right = solve(root.right);
         
-        int left = dfs(root.left);
-        int right = dfs(root.right);
-        
-        int sum = left + right + root.data;
-        
-        root.data = left + right;
-        return sum;
+        int val = root.data;
+        root.data = left+right;
+        return left + val + right;
     }
 }
