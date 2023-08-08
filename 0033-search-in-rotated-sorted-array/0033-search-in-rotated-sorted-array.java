@@ -1,42 +1,46 @@
-class Solution {
-    public int search(int[] nums, int target) {
+class Solution{
+    public int search(int[] nums, int target){
+        int n = nums.length;
         int lo = 0;
-        int hi = nums.length-1;
+        int hi = nums.length - 1;
+        
         while(lo<hi){
-            int mid = lo - (lo-hi)/2;
+            int mid = lo-(lo-hi)/2;
             
-            if(nums[hi]>nums[mid]){
-                hi = mid;
-            }
-            else{
+            if(nums[mid] > nums[hi]){
                 lo = mid+1;
             }
+            else{
+                hi = mid;
+            }
         }
-        int one = func(nums,0,lo-1,target);
-        int two = func(nums,lo,nums.length-1,target);
-        if(one == -1){
-            return two;
+        
+        int la = solve(0,lo-1,nums,target);
+        int ra = solve(lo,n-1,nums,target);
+        
+        if(la == -1){
+            return ra;
         }
         else{
-            return one;
+            return la;
         }
     }
     
-    public int func(int[] nums,int lo,int hi,int x){
+    public int solve(int lo,int hi,int[] nums,int target){
         while(lo<=hi){
-            int mid  = lo - (lo-hi)/2;
+            int mid = lo-(lo-hi)/2;
             
-            if(nums[mid] == x){
+            if(nums[mid] == target){
                 return mid;
             }
-            if(nums[mid] > x){
+            
+            if(nums[mid] > target){
                 hi = mid-1;
             }
             else{
                 lo = mid+1;
             }
         }
-        
         return -1;
     }
 }
