@@ -93,27 +93,23 @@ class Main {
 
 
 // } Driver Code Ends
-/*
-class Node
-{
+
+/*class Node{
     int data;
     Node left, right;
-   Node(int item)    {
+    Node(int item){
         data = item;
-        left = right = null;
-    }
-} */
-
-class GfG{
-    int findDist(Node root, int a, int b){
-        Node lca = LCA(root,a,b);
+        left = right = null;}}*/
         
-        int dist1 = findDistance(lca,a);
-        int dist2 = findDistance(lca,b);
+class GfG{
+    int findDist(Node root,int a,int b){
+        Node node = lca(root,a,b);
+        int dist1 = solve(node,a);
+        int dist2 = solve(node,b);
         return dist1 + dist2 - 2;
     }
     
-    public Node LCA(Node root,int a,int b){
+    public Node lca(Node root,int a,int b){
         if(root == null){
             return null;
         }
@@ -125,34 +121,34 @@ class GfG{
             return root;
         }
         
-        Node left = LCA(root.left,a,b);
-        Node right = LCA(root.right,a,b);
+        Node left = lca(root.left,a,b);
+        Node right = lca(root.right,a,b);
         
         if(left != null && right != null){
             return root;
         }
+        else if(left == null && right != null){
+            return right;
+        }
         else if(left != null && right == null){
             return left;
-        }
-        else if(right != null && left == null){
-            return right;
         }
         else{
             return null;
         }
     }
     
-    public int findDistance(Node root,int a){
+    public int solve(Node root,int x){
         if(root == null){
             return 0;
         }
         
-        if(root.data == a){
+        if(root.data == x){
             return 1;
         }
         
-        int left = findDistance(root.left,a);
-        int right = findDistance(root.right,a);
+        int left = solve(root.left,x);
+        int right = solve(root.right,x);
         
         if(left == 0 && right == 0){
             return 0;
