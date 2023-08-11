@@ -108,26 +108,19 @@ class GfG {
 
 
 // } Driver Code Ends
+
 class Solution{
-    int getCount(Node root,int l, int h){
-        int[] count = new int[1];
-        return inorder(root,l,h);
-        // return count[0];
-    }
-    
-    public int inorder(Node root,int l,int h){
-        if(root == null){
-            return 0;
-        }
+    int getCount(Node root,int l,int h){
+        if(root == null) return 0;
         
-        if(root.data >=l && root.data<=h){
-            return 1 + inorder(root.left,l,h) + inorder(root.right,l,h);
+        if(root.data >= l && root.data <= h){
+            return 1 + getCount(root.left,l,h) + getCount(root.right,l,h);
         }
-        else if(root.data<l){
-            return inorder(root.right,l,h);
+        else if(root.data < l){
+            return getCount(root.right,l,h);
         }
         else{
-            return inorder(root.left,l,h);
+            return getCount(root.left,l,h);
         }
     }
 }
