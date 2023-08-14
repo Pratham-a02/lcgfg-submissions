@@ -97,10 +97,9 @@ class GFG
 // } Driver Code Ends
 
 class Solution{
-    public int isPairPresent(Node root, int target){
-        HashMap<Integer,Integer> hm = new HashMap<>();
-        int ans = isPair(root,target,hm);
-        if(ans == 1){
+    public int isPairPresent(Node root,int target){
+        boolean ans = solve(root,target,new HashMap<>());
+        if(ans){
             return 1;
         }
         else{
@@ -108,28 +107,15 @@ class Solution{
         }
     }
     
-    public int isPair(Node root,int target,HashMap<Integer,Integer> hm){
-        if(root == null){
-            return 0;
+    public boolean solve(Node root,int target,HashMap<Integer,Integer> hm){
+        if(root == null) return false;
+        
+        if(hm.containsKey(target-root.data)){
+            return true;
         }
         
         hm.put(root.data,hm.getOrDefault(root.data,0)+1);
         
-        int left = isPair(root.left,target,hm);
-        int right = isPair(root.right,target,hm);
-        
-        if(hm.containsKey(target-root.data)){
-            return 1;
-        }
-        
-        if(left == 1 && right == 1){
-            return 1;
-        }
-        else if(left == 1 || right == 1){
-            return 1;
-        }
-        else{
-            return 0;
-        }
+        return solve(root.left,target,hm) || solve(root.right,target,hm);
     }
 }
