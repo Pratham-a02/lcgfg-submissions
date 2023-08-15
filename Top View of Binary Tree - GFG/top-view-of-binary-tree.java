@@ -107,57 +107,51 @@ public class Tree {
     }
 }
 // } Driver Code Ends
-/*
-class Node{
+/*class Node{
     int data;
     Node left;
     Node right;
     Node(int data){
         this.data = data;
         left=null;
-        right=null;
-    }
-}
-*/
+        right=null;}}*/
 
 class Pair{
-    int hd;
     Node node;
-    Pair(int hd,Node node){
-        this.hd = hd;
+    int hd;
+    
+    Pair(Node node,int hd){
         this.node = node;
+        this.hd = hd;
     }
 }
 
 class Solution{
-    static ArrayList<Integer> topView(Node root){
+    public static ArrayList<Integer> topView(Node root){
+        ArrayList<Integer> ans = new ArrayList<>();
         HashMap<Integer,Integer> hm = new HashMap<>();
-        
         int left = Integer.MAX_VALUE;
         int right = Integer.MIN_VALUE;
-        ArrayDeque<Pair> qu = new ArrayDeque<>();
         
-        qu.add(new Pair(0,root));
+        ArrayDeque<Pair> qu = new ArrayDeque<>();
+        qu.add(new Pair(root,0));
         
         while(qu.size()>0){
             Pair rem = qu.remove();
             
             left = Math.min(left,rem.hd);
             right = Math.max(right,rem.hd);
-            
             if(!hm.containsKey(rem.hd)){
                 hm.put(rem.hd,rem.node.data);
             }
             
             if(rem.node.left != null){
-                qu.add(new Pair(rem.hd-1,rem.node.left));
+                qu.add(new Pair(rem.node.left,rem.hd - 1));
             }
             if(rem.node.right != null){
-                qu.add(new Pair(rem.hd+1,rem.node.right));
+                qu.add(new Pair(rem.node.right,rem.hd + 1));
             }
         }
-        
-        ArrayList<Integer> ans = new ArrayList<>();
         
         for(int i = left;i<=right;i++){
             ans.add(hm.get(i));
