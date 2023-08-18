@@ -18,7 +18,7 @@ class Solution {
         int max = 0;
         for(int i = 0;i<n-1;i++){
             for(int j = i+1;j<n;j++){
-                if(vis[i][j] == true || vis[j][i] == true){
+                if(vis[i][j] == true){
                     max = Math.max(max,degree[i] + degree[j]-1);
                 }else{
                     max = Math.max(max,degree[i] + degree[j]);
