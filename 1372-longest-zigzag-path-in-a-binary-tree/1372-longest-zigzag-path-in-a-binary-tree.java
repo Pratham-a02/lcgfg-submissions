@@ -13,26 +13,27 @@
  *     }
  * }
  */
-
 class Solution{
+    int max;
     public int longestZigZag(TreeNode root){
-        int[] max = new int[1];
-        solve(root,0,max,true);
-        return max[0];
+        max = 0;
+        solve(root,true,0);
+        return max;
     }
     
-    public void solve(TreeNode root,int steps,int[] max,boolean goLeft){
-        if(root == null) return;
+    public void solve(TreeNode root,boolean goLeft,int steps){
+        if(root == null){
+            return;
+        }
         
-        max[0] = Math.max(max[0],steps);
-        
+        max = Math.max(max,steps);
         if(goLeft == true){
-            solve(root.left,steps+1,max,false);
-            solve(root.right,1,max,true);
+            solve(root.left,false,steps+1);
+            solve(root.right,true,1);
         }
         else{
-            solve(root.right,steps+1,max,true);
-            solve(root.left,1,max,false);
+            solve(root.right,true,steps+1);
+            solve(root.left,false,1);
         }
     }
 }
