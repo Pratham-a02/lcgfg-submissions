@@ -1,29 +1,26 @@
 class Solution {
     public String reorganizeString(String s) {
-        int[] farr = new int[26];
+        int max = Integer.MIN_VALUE;
         
-        for(int i = 0;i<s.length();i++){
-            char ch = s.charAt(i);
-            
+        int[] farr = new int[26];
+        for(char ch:s.toCharArray()){
             farr[ch-'a']++;
         }
-        int max = Integer.MIN_VALUE;
+        
         char ch = ' ';
         for(int i = 0;i<farr.length;i++){
             if(farr[i] > max){
                 max = farr[i];
-                ch = (char)(i+'a');
+                ch = (char)(i + 'a');
             }
         }
         
-        if(max>(s.length()+1)/2){
-          return "";  
-        }
+        if(max > (s.length()+1)/2) return "";
         
-        char[] arr = new char[s.length()];
         int idx = 0;
+        char[] ans = new char[s.length()];
         while(max>0){
-            arr[idx] = ch;
+            ans[idx] = ch;
             idx+=2;
             max--;
         }
@@ -31,18 +28,16 @@ class Solution {
         farr[ch-'a'] = 0;
         
         for(int i = 0;i<farr.length;i++){
-            while(farr[i]>0){
-                idx = (idx >= s.length()) ? 1 : idx;
-                
-                arr[idx] = (char)(i+'a');
-                idx+=2;
+            while(farr[i] > 0){
+                idx = idx>=s.length()?1:idx;
+                ans[idx] = (char)(i+'a');
                 farr[i]--;
+                idx+=2;
             }
         }
-        
         String res = "";
-        for(int i = 0;i<arr.length;i++){
-            res += arr[i];
+        for(int i = 0;i<ans.length;i++){
+            res += ans[i];
         }
         return res;
     }
