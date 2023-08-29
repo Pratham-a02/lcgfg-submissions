@@ -30,38 +30,34 @@ class GFG
 }
 // } Driver Code Ends
 
-
-
-
 class Solution{
-    
-    public int findMotherVertex(int V, ArrayList<ArrayList<Integer>>adj){
-        boolean[] visited = new boolean[V];
-        int mv = -1;
+    public int findMotherVertex(int V,ArrayList<ArrayList<Integer>>adj){
+        boolean[] vis = new boolean[V];
+        int mv = 0;
         for(int v = 0;v<V;v++){
-            if(!visited[v]){
-                dfs(v,adj,visited);
+            if(vis[v] == false){
+                dfs(v,vis,adj);
                 mv = v;
             }
         }
         
-        Arrays.fill(visited,false);
-        dfs(mv,adj,visited);
+        Arrays.fill(vis,false);
         
-        for(int v = 0;v<V;v++){
-            if(visited[v] == false){
+        dfs(mv,vis,adj);
+        for(int i = 0;i<vis.length;i++){
+            if(vis[i] == false){
                 return -1;
             }
         }
         return mv;
     }
     
-    public void dfs(int v,ArrayList<ArrayList<Integer>>adj,boolean[] visited){
-        visited[v] = true;
+    public void dfs(int v,boolean[] vis,ArrayList<ArrayList<Integer>>adj){
+        vis[v] = true;
         
         for(int nbr:adj.get(v)){
-            if(!visited[nbr]){
-                dfs(nbr,adj,visited);
+            if(!vis[nbr]){
+                dfs(nbr,vis,adj);
             }
         }
     }
