@@ -1,33 +1,30 @@
 class Solution{
     public boolean isBipartite(int[][] graph){
-        int n = graph.length;
-        int[] colors = new int[graph.length];
+        int[] color = new int[graph.length];
+        Arrays.fill(color,-1);
         
-        Arrays.fill(colors,-1);
-        
-        for(int i = 0;i<n;i++){
-            if(colors[i] != -1){
+        for(int i = 0;i<graph.length;i++){
+            if(color[i] != -1){
                 continue;
             }
-            if(dfs(i,colors,0,graph) == false){
+            
+            if(solve(i,0,color,graph) == false){
                 return false;
             }
         }
         return true;
     }
     
-    public boolean dfs(int currVert,int[] colors,int color,int[][] graph){
-        if(colors[currVert] != -1){
-            return colors[currVert] == color;
+    public boolean solve(int vert,int col,int[] color,int[][] graph){
+        if(color[vert] != -1){
+            return color[vert] == col;
         }
         
-        colors[currVert] = color;
-        
-        for(int nbr : graph[currVert]){
-            if(dfs(nbr,colors,1-color,graph) == false){
+        color[vert] = col;
+        for(int nbr:graph[vert]){
+            if(solve(nbr,1-col,color,graph) == false){
                 return false;
             }
-            
         }
         return true;
     }
