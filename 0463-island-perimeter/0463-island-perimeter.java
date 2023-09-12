@@ -1,6 +1,6 @@
 class Solution{
-    int count = 0;
-    public int islandPerimeter(int[][] grid) {
+    int count;
+    public int islandPerimeter(int[][] grid){
         count = 0;
         int m = grid.length;
         int n = grid[0].length;
@@ -8,9 +8,11 @@ class Solution{
         for(int i = 0;i<m;i++){
             for(int j = 0;j<n;j++){
                 if(grid[i][j] == 1){
-                    dfs(i,j,grid,m,n);
                     found = true;
-                    break;
+                    dfs(i,j,m,n,grid);
+                    if(found){
+                        break;
+                    }
                 }
             }
             if(found){
@@ -20,8 +22,8 @@ class Solution{
         return count;
     }
     
-    public void dfs(int cr,int cc,int[][] grid,int m,int n){
-        if(cr<0 || cc<0 || cr>= m || cc>=n || grid[cr][cc] == 0){
+    public void dfs(int cr,int cc,int m,int n,int[][] grid){
+        if(cr<0 || cc<0 || cr>=m || cc>=n || grid[cr][cc] == 0){
             count++;
             return;
         }
@@ -29,12 +31,12 @@ class Solution{
         if(grid[cr][cc] == -1){
             return;
         }
-        
         grid[cr][cc] = -1;
-        dfs(cr-1,cc,grid,m,n);
-        dfs(cr,cc+1,grid,m,n);
-        dfs(cr+1,cc,grid,m,n);
-        dfs(cr,cc-1,grid,m,n);
+        
+        dfs(cr-1,cc,m,n,grid);
+        dfs(cr,cc+1,m,n,grid);
+        dfs(cr+1,cc,m,n,grid);
+        dfs(cr,cc-1,m,n,grid);
         
         return;
     }
