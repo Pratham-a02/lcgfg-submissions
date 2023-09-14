@@ -15,7 +15,7 @@ class Main {
             int edg = Integer.parseInt(st[0]);
             int nov = Integer.parseInt(st[1]);
 
-            for (int i = 0; i < nov + 1; i++)
+            for (int i = 0; i < nov; i++)
                 list.add(i, new ArrayList<Integer>());
 
             int p = 0;
@@ -53,15 +53,13 @@ class Main {
 }
 
 // } Driver Code Ends
+
 class Solution{
-    
-    public static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj){
+    static int[] topoSort(int V,ArrayList<ArrayList<Integer>> adj){
         int[] indegree = new int[V];
-        int[] ans = new int[V];
-        int count = 0;
         
-        for(int v = 0;v<V;v++){
-            for(int nbr:adj.get(v)){
+        for(int i = 0;i<adj.size();i++){
+            for(int nbr:adj.get(i)){
                 indegree[nbr]++;
             }
         }
@@ -72,20 +70,26 @@ class Solution{
                 qu.add(i);
             }
         }
-        int idx = 0;
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
         while(qu.size()>0){
-            int rem = qu.remove();
-            ans[idx++] = rem;
+            int val = qu.remove();
             
-            for(int n:adj.get(rem)){
-                indegree[n]--;
-                
-                if(indegree[n] == 0){
-                    qu.add(n);
+            ans.add(val);
+            
+            for(int nbr:adj.get(val)){
+                indegree[nbr]--;
+                if(indegree[nbr] == 0){
+                    qu.add(nbr);
                 }
             }
         }
-    
-        return ans;
+        
+        int[] res = new int[ans.size()];
+        for(int i = 0;i<res.length;i++){
+            res[i] = ans.get(i);
+        }
+        return res;
     }
 }
