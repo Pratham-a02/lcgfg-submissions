@@ -1,23 +1,22 @@
 class Solution{
     public int ladderLength(String beginWord, String endWord, List<String> wordList){
+        HashMap<String,Boolean> hm = new HashMap<>();
         if(!wordList.contains(endWord)){
             return 0;
         }
-        
-        ArrayDeque<String> qu = new ArrayDeque<>();
-        HashMap<String,Boolean> hm = new HashMap<>();
         for(int i = 0;i<wordList.size();i++){
             hm.put(wordList.get(i),false);
         }
-        
+        ArrayDeque<String> qu = new ArrayDeque<>();
         qu.add(beginWord);
         hm.put(beginWord,true);
+        
         int length = 1;
         
         while(qu.size()>0){
-            int csize = qu.size();
+            int currSize = qu.size();
             
-            for(int i = 0;i<csize;i++){
+            for(int i = 0;i<currSize;i++){
                 String currWord = qu.remove();
                 
                 if(currWord.equals(endWord)){
@@ -31,12 +30,12 @@ class Solution{
         return 0;
     }
     
-    public void addWord(String currWord,HashMap<String,Boolean>hm,ArrayDeque<String> qu){
+    public void addWord(String currWord,HashMap<String,Boolean> hm,ArrayDeque<String> qu){
         for(int i = 0;i<currWord.length();i++){
             char[] arr = currWord.toCharArray();
             
             for(int j = 0;j<26;j++){
-                char c = (char)('a' + j);
+                char c = (char)(j + 'a');
                 
                 arr[i] = c;
                 
