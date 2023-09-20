@@ -10,12 +10,11 @@ class Solution{
         int max = Integer.MIN_VALUE;
         for(int num : nums){
             if(!hs.contains(num-1)){
-                int currNum = num;
                 int currLen = 1;
                 
-                while(hs.contains(currNum+1)){
+                while(hs.contains(num+1)){
                     currLen++;
-                    currNum++;
+                    num++;
                 }
                 max = Math.max(max,currLen);
             }
