@@ -1,26 +1,30 @@
 class Solution {
     public int minOperations(int[] nums, int x) {
-        int ps = 0;
-        int total = 0;
-        for(int val : nums){
-            total += val;
+        int target = -x;
+        for(int num:nums){
+            target += num;
         }
-        int k = total - x;
-        if(k == 0) return nums.length;
-        int max = 0;
-        HashMap<Integer,Integer> hm = new HashMap<>();
-        hm.put(0,-1);
         
-        for(int i = 0;i<nums.length;i++){
-            ps += nums[i];
+        if(target == 0) return nums.length;
+        if(target < 0) return -1;
+        
+        int res = -1;
+        int left = 0;
+        int ps = 0;
+        
+        for(int right = 0;right<nums.length;right++){
+            ps += nums[right];
             
-            if(hm.containsKey(ps - k)){
-                max = Math.max(max,i-hm.get(ps-k));
+            while(ps > target){
+                ps = ps-nums[left];
+                left++;
             }
             
-            hm.put(ps,i);
+            if(ps == target){
+                res = Math.max(res,right-left+1);
+            }
         }
-        if(max == 0)return -1;
-        return nums.length - max;
+        
+        return res == -1?-1:nums.length-res;
     }
 }
