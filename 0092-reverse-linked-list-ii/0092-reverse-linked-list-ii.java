@@ -15,34 +15,38 @@ class Solution{
         }
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
+        
         ListNode pre = dummy;
         ListNode curr = head;
-        int counter = 1;
+        int count = 1;
         
-        while(counter != left){
-            counter++;
+        while(count != left){
             pre = pre.next;
+            curr = curr.next;
+            count++;
+        }
+        
+        ListNode temp1 = curr;
+        pre.next = null;
+        
+        while(count != right){
+            count++;
             curr = curr.next;
         }
         
-        pre.next = null;
-        ListNode temp = curr;
-        while(counter != right){
-            counter++;
-            temp = temp.next;
-        }
+        ListNode temp2 = curr.next;
+        curr.next = null;
         
-        ListNode nTemp = temp.next;
-        temp.next = null;
-        ListNode nHead = reverse(curr);
+        ListNode nTemp = reverse(temp1);
+        pre.next = nTemp;
         
-        pre.next = nHead;
+        curr = head;
         while(curr.next != null){
             curr = curr.next;
         }
-        curr.next = nTemp;
-        
+        curr.next = temp2;
         return dummy.next;
+        
     }
     
     public ListNode reverse(ListNode head){
