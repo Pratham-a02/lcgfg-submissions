@@ -59,22 +59,24 @@ class GFG {
 
 
 class Solution {
-    public static int isStackPermutation(int n, int[] pushed, int[] popped) {
+    public static int isStackPermutation(int n, int[] ip, int[] op) {
         Stack<Integer> st = new Stack<>();
         int idx = 0;
         
-        for(int i = 0;i<pushed.length;i++){
-            st.push(pushed[i]);
-                while(st.size()>0 && st.peek() == popped[idx]){
-                    st.pop();
-                    idx++;
+        for(int i = 0;i<n;i++){
+            st.push(ip[i]);
+            
+            while(idx<n && st.size()> 0 && op[idx] == st.peek()){
+                idx++;
+                st.pop();
             }
         }
-        if(st.size()>0){
-            return 0;
+        
+        if(st.size() == 0){
+            return 1;
         }
         else{
-            return 1;
+            return 0;
         }
     }
 }
