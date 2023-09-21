@@ -22,28 +22,31 @@ class SortedStack{
 }
 // } Driver Code Ends
 
+
+/*Complete the function below*/
 class GfG{
 	public Stack<Integer> sort(Stack<Integer> st){
-        if(st.size() == 0){
-            return st;
-        }
-        
-        int val = st.peek();
-        st.pop();
-        sort(st);
-        insert(st,val);
-        return st;
+		if(st.size() == 0){
+		    return st;
+		}
+		
+		int val = st.pop();
+		sort(st);
+		insert(st,val);
+		
+		return st;
 	}
 	
 	public void insert(Stack<Integer> st,int val){
-	    if(st.size() == 0 || st.peek()<val){
+	    if(st.size() == 0 || val > st.peek()){
 	        st.push(val);
 	        return;
 	    }
 	    
-	    int temp = st.peek();
-	    st.pop();
+	    int curr = st.pop();
 	    insert(st,val);
-	    st.push(temp);
+	    st.push(curr);
+	    
+	    return;
 	}
 }
