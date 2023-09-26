@@ -24,37 +24,36 @@ class GFG {
 }
 // } Driver Code Ends
 
-
-//User function Template for Java
-
-class Solution {
-    static int canReach(int[] arr, int N) {
-        if(arr.length<=1){
+class Solution{
+    static int canReach(int[] A, int N){
+        if(N == 1){
             return 1;
         }
-        if(arr[0] == 0){
+        
+        if(A[0] == 0){
             return 0;
         }
         
+        int maxReach = A[0];
+        int steps = A[0];
         int jump = 1;
-        int maxReach = arr[0];
-        int steps = arr[0];
         
-        for(int i = 0;i<N;i++){
+        for(int i = 1;i<N;i++){
             if(i == N-1){
                 return 1;
             }
             
-            maxReach = Math.max(maxReach,i+arr[i]);
+            maxReach = Math.max(maxReach,i+A[i]);
             steps--;
+            
             if(steps == 0){
-                jump++;
                 if(i>=maxReach){
                     return 0;
                 }
                 steps = maxReach-i;
+                jump++;
             }
         }
-        return 0;
+        return 1;
     }
 }
