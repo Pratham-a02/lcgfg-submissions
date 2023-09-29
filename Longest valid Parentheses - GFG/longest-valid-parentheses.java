@@ -20,33 +20,32 @@ class GFG{
 // } Driver Code Ends
 
 class Solution{
-    static int maxLength(String S){
+    static int maxLength(String s){
         Stack<Integer> st = new Stack<>();
-
-        for(int i = 0;i<S.length();i++){
-            char ch = S.charAt(i);
+        for(int i = 0;i<s.length();i++){
+            char ch = s.charAt(i);
             
             if(ch == '('){
                 st.push(i);
             }
-            else if(ch == ')'){
-                if(st.isEmpty() || S.charAt(st.peek()) != '('){
-                    st.push(i);
+            else{
+                if(st.size()>0 && s.charAt(st.peek()) == '('){
+                    st.pop();
                 }
                 else{
-                    st.pop();
+                    st.push(i);
                 }
             }
         }
         
-        int maxLen = S.length();
+        int currLen = s.length();
         int max = 0;
         while(st.size()>0){
-            int currLen = st.pop();    
-            maxLen = maxLen - currLen - 1;
-            max = Math.max(max,maxLen);
-            maxLen = currLen;
+            int ele = st.pop();
+            max = Math.max(max,currLen - ele - 1);
+            currLen = ele;
         }
-        return Math.max(max,maxLen);
+        
+        return Math.max(max,currLen);
     }
 }
