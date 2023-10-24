@@ -9,7 +9,7 @@ class Solution{
                 st.push(i);
             }
             else if(ch == ')'){
-                if(!st.isEmpty() && s.charAt(st.peek()) == '('){
+                if(st.size()>0 && s.charAt(st.peek()) == '('){
                     st.pop();
                 }
                 else{
