@@ -1,27 +1,21 @@
 class Solution{
     public int minAddToMakeValid(String s){
-        int ans = validParentheses(s);
-        return ans;
-    }
-    
-    public int validParentheses(String s){
         Stack<Character> st = new Stack<>();
         
-        for(int i = 0;i<s.length();i++){
-            char ch = s.charAt(i);
-            
+        for(char ch : s.toCharArray()){
             if(ch == '('){
                 st.push(ch);
             }
             else{
-                if(st.size() == 0 || st.peek() != '('){
-                    st.push(ch);
+                if(st.size()>0 && st.peek() == '('){
+                    st.pop();
                 }
                 else{
-                    st.pop();
+                    st.push(ch);
                 }
             }
         }
+        
         return st.size();
     }
 }
