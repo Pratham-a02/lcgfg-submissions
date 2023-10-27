@@ -1,33 +1,33 @@
 class Solution {
     public String removeKdigits(String num, int k) {
         char[] arr = num.toCharArray();
-        int digits = num.length()-k;
+        Stack<Character> st = new Stack<>();
         
-        int top = -1;
-        int start = 0;
-        
-        for(int i = 0;i<arr.length;i++){
-            while(top>= 0 && arr[top]>arr[i] && k>0){
+        for(char ch : num.toCharArray()){
+            while(st.size()>0 && k>0 && st.peek()>ch){
+                st.pop();
                 k--;
-                top--;
             }
-            
-            top++;
-            arr[top] = arr[i];
+            if(!st.isEmpty() || ch != '0'){
+                st.push(ch);
+            }
         }
         
-        while(arr[start] == '0' && start<=top){
-            start++;
+        while(st.size()>0 && k>0){
+            st.pop();
+            k--;
         }
         
-        String ans = "";
-        
-        for(int i = start;i<digits;i++){
-            ans += arr[i];
+        if(st.size() == 0){
+            return "0";
         }
         
-        if(ans.length() == 0) return "0";
+        StringBuilder sb = new StringBuilder();
+        while(st.size()>0){
+            char ch = st.pop();
+            sb.append(ch);
+        }
         
-        return ans;
+        return sb.reverse().toString();
     }
 }
