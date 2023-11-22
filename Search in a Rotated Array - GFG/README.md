@@ -1,6 +1,6 @@
 # Search in a Rotated Array
-## Easy
-<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a sorted and rotated array A of N distinct elements which is rotated at some point, and given an element key. The task is to find the index of the given element key in the array A.</span></p>
+## Medium
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a sorted and rotated array A of N distinct elements which is rotated at some point, and given an element key. The task is to find the index of the given element key in the array A. The whole array A is given as the range to search.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
@@ -8,6 +8,7 @@
 N = 9
 A[] = {5, 6, 7, 8, 9, 10, 1, 2, 3}
 key = 10
+l = 0 , h = 8
 <strong>Output</strong>:
 5
 <strong>Explanation</strong>: 10 is found at index 5.</span></pre>
@@ -17,7 +18,8 @@ key = 10
 <pre><span style="font-size:18px"><strong>Input</strong>:
 N = 4
 A[] = {3, 5, 1, 2}
-key = 6</span><span style="font-size:18px"><strong>
+key = 6
+l = 0 , h = 3</span><span style="font-size:18px"><strong>
 Output</strong>:
 -1</span><span style="font-size:18px"><strong>
 Explanation</strong>: There is no element that has value 6.</span></pre>
