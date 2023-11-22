@@ -30,50 +30,45 @@ public class GFG
 }
 // } Driver Code Ends
 
-
-//User function Template for Java
-
 class Solution{
-    public int search(int A[], int l, int h, int key){
-        int lo = 0;
-        int hi = A.length - 1;
-        
-        while(lo<hi){
-            int mid = (lo+hi)/2;
-            if(A[hi]<A[mid]){
-                lo = mid+1;
+    int search(int[] A,int l,int h,int key){
+        while(l<h){
+            int mid = (l+h)/2;
+            if(A[mid]>A[h]){
+                l = mid+1;
             }
             else{
-                hi = mid;
+                h = mid;
             }
         }
+        int la = solve(0,l-1,A,key);
+        int ra = solve(l,A.length-1,A,key);
         
-        int one = findKey(A,key,0,lo-1);
-        int two = findKey(A,key,lo,A.length-1);
-        if(one != -1){
-            return one;
+        if(la == -1 && ra == -1){
+            return -1;
         }
-        else if(two != -1){
-            return two;
+        else if(la == -1 && ra != -1){
+            return ra;
         }
         else{
-            return -1;
+            return la;
         }
     }
     
-    public int findKey(int[] A,int key,int lo,int hi){
-        while(lo<=hi){
-            int mid = (lo+hi)/2;
-            if(A[mid] == key){
+    public static int solve(int l,int h,int[] A,int target){
+        while(l<=h){
+            int mid = (l+h)/2;
+            if(A[mid] == target){
                 return mid;
             }
-            if(A[mid]<key){
-                lo = mid+1;
+            if(A[mid]<target){
+                l = mid+1;
             }
             else{
-                hi = mid-1;
+                h = mid-1;
             }
         }
         return -1;
+        
     }
 }
