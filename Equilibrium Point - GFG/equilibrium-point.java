@@ -31,36 +31,21 @@ class Main {
 }
 // } Driver Code Ends
 
-
-class Solution {
-
-    
-    // a: input array
-    // n: size of array
-    // Function to find equilibrium point in the array.
-    public static int equilibriumPoint(long arr[], int n) {
-        if(n == 1){
-            return n;
-        }
-        int[] left = new int[n];
-        int[] right = new int[n];
-        int ps = 0;
-        for(int i = 0;i<n;i++){
-            ps+=arr[i];
-            left[i] = ps;
-        }
-        ps = 0;
-        for(int i = n-1;i>=0;i--){
-            ps+=arr[i];
-            right[i] = ps;
+class Solution{
+    public static int equilibriumPoint(long[] arr,int n){
+        long ps = 0;
+        long sum = 0;
+        for(long val : arr){
+            sum += val;
         }
         
         for(int i = 0;i<n;i++){
-            if(left[i] == right[i]){
-                return i+1;
-                
+            if(sum - (ps+arr[i]) == ps){
+                return (i+1);
             }
+            ps += arr[i];
         }
+        
         return -1;
     }
 }
