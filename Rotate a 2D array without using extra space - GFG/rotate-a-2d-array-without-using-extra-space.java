@@ -36,39 +36,29 @@ public class Main {
 }
 // } Driver Code Ends
 
-
-//User function Template for Java
-
-
-
-class Solution {
-    void rotateMatrix(int arr[][], int n) {
-        // for(int i = 0;i<n;i++){
-        //     for(int j = i+1;j<n;j++){
-        //         int temp = arr[i][j];
-        //         arr[i][j] = arr[j][i];
-        //         arr[j][i] = temp;
-        //     }
-        // }
-        
-        for(int[] num:arr){
-            reverse(0,num.length-1,num);
+class Solution{
+    void rotateMatrix(int[][] mat,int n){
+        for(int[] arr:mat){
+            reverse(arr);
         }
         
         for(int i = 0;i<n;i++){
             for(int j = i+1;j<n;j++){
-                int temp = arr[i][j];
-                arr[i][j] = arr[j][i];
-                arr[j][i] = temp;
+                int temp = mat[i][j];
+                mat[i][j] = mat[j][i];
+                mat[j][i] = temp;
             }
         }
     }
     
-    public void reverse(int i,int j,int[] num){
+    public void reverse(int[] arr){
+        int i = 0;
+        int j = arr.length-1;
+        
         while(i<j){
-            int temp = num[i];
-            num[i] = num[j];
-            num[j] = temp;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
             i++;
             j--;
         }
