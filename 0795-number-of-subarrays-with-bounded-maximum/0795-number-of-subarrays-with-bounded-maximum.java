@@ -3,18 +3,17 @@ class Solution{
         int si = -1;
         int ei = -1;
         int ans = 0;
+        
         for(int i = 0;i<nums.length;i++){
-            int val = nums[i];
-            
-            if(val <= right && val >= left){
+            if(nums[i] >=left && nums[i]<=right){
                 ei = i;
-                ans +=(ei-si);
+                ans += (ei-si);
             }
-            else if(val > right){
+            else if(nums[i]<left){
+                ans += (ei-si);
+            }
+            else if(nums[i]>right){
                 si = ei = i;
-            }
-            else if(val<left){
-                ans +=(ei-si);
             }
         }
         return ans;
