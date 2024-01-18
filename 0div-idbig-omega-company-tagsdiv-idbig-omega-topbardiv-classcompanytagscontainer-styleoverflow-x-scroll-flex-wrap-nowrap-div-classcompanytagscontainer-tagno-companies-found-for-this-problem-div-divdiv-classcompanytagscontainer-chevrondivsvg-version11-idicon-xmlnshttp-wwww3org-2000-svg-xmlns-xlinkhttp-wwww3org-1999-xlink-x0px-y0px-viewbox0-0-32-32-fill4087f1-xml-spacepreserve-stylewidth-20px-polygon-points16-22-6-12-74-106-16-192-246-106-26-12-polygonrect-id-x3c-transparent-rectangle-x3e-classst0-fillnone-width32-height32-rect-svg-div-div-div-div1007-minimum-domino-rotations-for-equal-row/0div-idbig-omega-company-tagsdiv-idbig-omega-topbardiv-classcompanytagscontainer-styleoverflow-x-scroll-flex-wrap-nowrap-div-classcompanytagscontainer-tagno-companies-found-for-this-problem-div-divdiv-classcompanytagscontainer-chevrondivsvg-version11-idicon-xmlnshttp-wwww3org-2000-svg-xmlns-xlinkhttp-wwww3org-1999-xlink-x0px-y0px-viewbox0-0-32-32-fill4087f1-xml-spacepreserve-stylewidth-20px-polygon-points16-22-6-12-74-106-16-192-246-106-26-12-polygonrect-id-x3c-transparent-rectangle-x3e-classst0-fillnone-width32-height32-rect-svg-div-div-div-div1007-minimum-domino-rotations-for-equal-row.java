@@ -1,5 +1,5 @@
-class Solution{
-    public int minDominoRotations(int[] tops,int[] bottoms){
+class Solution {
+    public int minDominoRotations(int[] tops, int[] bottoms) {
         int fe = tops[0];
         int se = bottoms[0];
         
@@ -7,7 +7,6 @@ class Solution{
             if(tops[i] != fe && bottoms[i] != fe){
                 fe = -1;
             }
-            
             if(tops[i] != se && bottoms[i] != se){
                 se = -1;
             }
@@ -18,9 +17,9 @@ class Solution{
         }
         
         int eligible = (fe == -1)?se:fe;
-        
         int ts = 0;
         int bs = 0;
+        
         for(int i = 0;i<tops.length;i++){
             if(tops[i] != eligible) ts++;
             if(bottoms[i] != eligible) bs++;
