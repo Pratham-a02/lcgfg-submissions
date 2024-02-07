@@ -1,42 +1,46 @@
-class Solution{
-    public int maxSubarraySumCircular(int[] a) {
-        int n = a.length;
+class Solution {
+    public int maxSubarraySumCircular(int[] nums) {
         int total = 0;
-        for(int val:a){
-            total += val;
+        for(int num:nums){
+            total += num;
         }
         
-        int noCircular = kadaneAlgo(a,n);
-        int circular = total - (minKadane(a,n));
-        if(circular == 0){
-            return noCircular;
+        int normal = kadaneAlgo(nums);
+        int abNormal = total - minKadane(nums);
+        
+        if(abNormal == 0){
+            return normal;
         }
-        return Math.max(noCircular, circular);
+        
+        return Math.max(normal,abNormal);
     }
     
-    public static int kadaneAlgo(int[] a,int n){
-        int max = Integer.MIN_VALUE;
-        int curr = 0;
-        for(int i = 0;i<n;i++){
-            curr += a[i];
-            max = Math.max(max,curr);
-            if(curr<0){
-                curr = 0;
-            }
-        }
-        return max;
-    }
-    
-    public static int minKadane(int[] a,int n){
-        int min = Integer.MAX_VALUE;  
-        int curr = 0;
-        for(int i = 0;i<n;i++){
-            curr += a[i];
-            min = Math.min(min,curr);
-            if(curr>0){
-                curr = 0;
+    public int minKadane(int[] nums){
+        int min = Integer.MAX_VALUE;
+        int currSum = 0;
+        
+        for(int i = 0;i<nums.length;i++){
+            currSum += nums[i];
+            min = Math.min(min,currSum);
+            
+            if(currSum>0){
+                currSum = 0;
             }
         }
         return min;
+    }
+    
+    public int kadaneAlgo(int[] nums){
+        int max = Integer.MIN_VALUE;
+        int currSum = 0;
+        for(int i = 0;i<nums.length;i++){
+            currSum += nums[i];
+            max = Math.max(max,currSum);
+            
+            if(currSum<0){
+                currSum = 0;
+            }
+        }
+        return max;
     }
 }
