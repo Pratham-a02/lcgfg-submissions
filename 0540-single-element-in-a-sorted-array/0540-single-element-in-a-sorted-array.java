@@ -11,7 +11,7 @@ class Solution {
         else if(nums[nums.length-1] != nums[nums.length-2]){
             return nums[nums.length-1];
         }
-        while(lo<hi){
+        while(lo<=hi){
             int mid = lo - (lo-hi)/2;
             
             if(mid - 1>=0 && mid+1<nums.length){
