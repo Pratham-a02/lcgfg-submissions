@@ -6,7 +6,7 @@ class Solution {
         int m = matrix.length;
         int n = matrix[0].length;
         
-        while(i>=0 && j>=0 && i<m && j<n){
+        while(j>=0 && i<m){
             if(matrix[i][j] == target){
                 return true;
             }
