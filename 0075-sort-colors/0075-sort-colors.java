@@ -1,5 +1,5 @@
-class Solution {
-    public void sortColors(int[] nums) {
+class Solution{
+    public void sortColors(int[] nums){
         int i = 0;
         int j = 0;
         int k = nums.length-1;
@@ -13,16 +13,16 @@ class Solution {
                 i++;
                 j++;
             }
-            else if(nums[i] == 2){
+            else{
                 swap(i,k,nums);
                 k--;
             }
         }
     }
     
-    public void swap(int i,int j, int[] arr){
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+    public void swap(int i,int j,int[] nums){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
