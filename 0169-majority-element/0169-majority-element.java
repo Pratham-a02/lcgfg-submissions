@@ -1,19 +1,18 @@
-class Solution{
-    public int majorityElement(int[] nums){
+class Solution {
+    public int majorityElement(int[] nums) {
         Integer mele = null;
+        int freq = 0;
         
-        int count = 0;
-        
-        for(int ele:nums){
-            if(count == 0){
-                mele = ele;
-                count = 1;
+        for(int num : nums){
+            if(freq == 0){
+                mele = num;
+                freq = 1;
             }
-            else if(ele == mele){
-                count++;
+            else if(num == mele){
+                freq++;
             }
-            else{
-                count--;
+            else if(num != mele){
+                freq--;
             }
         }
         return mele;
