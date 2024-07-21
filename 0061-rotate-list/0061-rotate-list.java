@@ -8,32 +8,42 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution{
-    public ListNode rotateRight(ListNode head, int k){
-        if(head == null || head.next == null) return head;
-        int length = calculateLength(head);
-        if(k == 0 || k%length == 0) return head;
-        k = k%length;
-        int rlen = length - k;
+
+
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        
+        int len = length(head);
+        
+        if(k == 0 || k%len == 0) return head;
+        
+        k = k%len;
+        int rLen = len - k;
+        
         ListNode curr = head;
-        int len = 1;
-        while(len != rlen){
-            len++;
+        int cnt = 1;
+        
+        while(cnt != rLen){
+            cnt++;
             curr = curr.next;
         }
         
-        ListNode nHead = curr.next;
+        ListNode temp = curr.next;
         curr.next = null;
         
-        curr = nHead;
+        curr = temp;
         while(curr.next != null){
             curr = curr.next;
         }
+        
         curr.next = head;
-        return nHead;
+        return temp;
     }
     
-    public int calculateLength(ListNode head){
+    public int length(ListNode head){
         int len = 0;
         ListNode curr = head;
         
@@ -41,7 +51,6 @@ class Solution{
             len++;
             curr = curr.next;
         }
-        
         return len;
     }
 }
