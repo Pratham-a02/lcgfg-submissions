@@ -1,5 +1,5 @@
-class Solution{
-    public int numPairsDivisibleBy60(int[] time){
+class Solution {
+    public int numPairsDivisibleBy60(int[] time) {
         HashMap<Integer,Integer> hm = new HashMap<>();
         int ans = 0;
         
