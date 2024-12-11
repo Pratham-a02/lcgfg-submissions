@@ -16,11 +16,14 @@ class Solution {
     public TreeNode solve(TreeNode root){
         if(root == null) return null;
         
-        TreeNode nNode = new TreeNode(root.val);
         
-        nNode.left = solve(root.right);
-        nNode.right = solve(root.left);
         
-        return nNode;
+        TreeNode leftTree = solve(root.right);
+        TreeNode rightTree = solve(root.left);
+        
+        root.left = leftTree;
+        root.right = rightTree;
+        
+        return root;
     }
 }
