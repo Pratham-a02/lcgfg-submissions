@@ -24,7 +24,7 @@ class Solution{
                 }
             }
         }
-        if(count == 0){
+        if(max == nums.length){
             return nums.length-1;
         }
         return max;
