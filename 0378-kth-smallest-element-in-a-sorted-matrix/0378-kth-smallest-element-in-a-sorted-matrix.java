@@ -1,5 +1,5 @@
-class Solution{
-    public int kthSmallest(int[][] matrix, int k){
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
         int n = matrix.length;
         int lo = matrix[0][0];
         int hi = matrix[n-1][n-1];
@@ -8,9 +8,9 @@ class Solution{
             int mid = lo - (lo-hi)/2;
             
             int count = 0;
-            int j = matrix[0].length-1;
             for(int i = 0;i<n;i++){
-                while(j>=0 && mid<matrix[i][j]){
+                int j = n-1;
+                while(j>=0 && matrix[i][j]>mid){
                     j--;
                 }
                 count += (j+1);
@@ -23,7 +23,6 @@ class Solution{
                 hi = mid;
             }
         }
-        
         return lo;
     }
 }
