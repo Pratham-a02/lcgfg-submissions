@@ -13,11 +13,11 @@ class Solution {
         int cntZero = count(arr.begin(),arr.end(),0);
         
         for(int i = 0;i<n;i++){
-            if(i<cntZero && arr[i] == 1 && frozen[i]){
+            if(i<cntZero && arr[i] == 1 && frozen[i] == 1){
                 return false;
             }
             
-            if(i>=cntZero && arr[i] == 0 && frozen[i]){
+            if(i>=cntZero && arr[i] == 0 && frozen[i] == 1){
                 return false;
             }
         }
